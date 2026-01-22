@@ -137,6 +137,14 @@
     100% { transform: scale(1) rotate(180deg); opacity: 0.5; filter: brightness(1); }
 }
 
+/* ГАРАНТИЯ КРУГЛОЙ ФОРМЫ */
+.current-sun,
+.planet-visual,
+.planet-slot {
+    aspect-ratio: 1 / 1 !important;
+    -webkit-aspect-ratio: 1 / 1 !important;
+}
+
 /* ШАПКА - ГАРМОНИЧНАЯ ВЕРСИЯ */
 .map-header {
     position: fixed;
@@ -828,6 +836,8 @@
     -webkit-backdrop-filter: blur(15px);
     padding: 0.5rem;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
 }
 
 .compact-modal.active {
@@ -1121,6 +1131,8 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: var(--modal-border) rgba(138, 180, 248, 0.1);
+    overscroll-behavior: contain;
+    scroll-behavior: smooth;
 }
 
 /* Вертикальный скроллбар для контейнера карт */
@@ -1182,6 +1194,7 @@
     position: relative;
     overflow: hidden;
     box-shadow: 0 0 10px currentColor;
+    aspect-ratio: 1 / 1;
 }
 
 .compact-preview.sun {
@@ -1382,6 +1395,12 @@
 /* СТАРОЕ МОДАЛЬНОЕ ОКНО (СКРЫТО) */
 .selection-modal {
     display: none;
+}
+
+/* КЛАСС ДЛЯ ФИКСА ПРОКРУТКИ */
+.modal-touch-fix {
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 
 /* Анимации */
@@ -1994,6 +2013,17 @@
     /* Отключаем свечение солнца */
     .current-sun::before {
         display: none;
+    }
+    
+    /* ПРОФИЛАКТИКА РАСТЯГИВАНИЯ */
+    .current-sun,
+    .planet-visual {
+        width: var(--size) !important;
+        height: var(--size) !important;
+        max-width: var(--size) !important;
+        max-height: var(--size) !important;
+        min-width: var(--size) !important;
+        min-height: var(--size) !important;
     }
     
     /* ШАПКА ДЛЯ ТЕЛЕФОНОВ */
@@ -2867,6 +2897,50 @@
     }
 }
 
+/* ФИКСЫ ДЛЯ iOS SAFARI И МОБИЛЬНЫХ УСТРОЙСТВ */
+@supports (-webkit-touch-callout: none) {
+    .compact-cards-container {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: scroll;
+        height: 100%;
+    }
+    
+    .compact-cards-container * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+    }
+    
+    .compact-modal {
+        -webkit-overflow-scrolling: touch;
+        overflow-y: auto;
+    }
+}
+
+/* БЕЗОПАСНЫЕ ОБЛАСТИ ДЛЯ СОВРЕМЕННЫХ ТЕЛЕФОНОВ */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .map-header {
+        padding-top: env(safe-area-inset-top);
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    
+    .universe-map-main {
+        padding-top: calc(50px + env(safe-area-inset-top));
+    }
+    
+    @media (max-width: 768px) {
+        .universe-map-main {
+            padding-top: calc(52px + env(safe-area-inset-top));
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .universe-map-main {
+            padding-top: calc(56px + env(safe-area-inset-top));
+        }
+    }
+}
+
 /* Фикс для iOS Safari */
 @supports (-webkit-touch-callout: none) {
     .universe-map-page {
@@ -2922,85 +2996,6 @@
         .universe-map-main {
             height: calc(100vh - 52px);
         }
-    }
-}
-
-/* Улучшение читаемости на светлом фоне */
-@media (prefers-color-scheme: light) {
-    .universe-map-page {
-        background: #f0f0f0;
-        color: #333;
-    }
-    
-    .map-header {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.98) 100%);
-        border-bottom: 1px solid #ddd;
-    }
-    
-    .header-title {
-        color: #1a5fa0;
-        text-shadow: none;
-        background: rgba(26, 95, 160, 0.05);
-        border: 1px solid rgba(26, 95, 160, 0.2);
-    }
-    
-    .back-button {
-        color: #333;
-        background: rgba(138, 180, 248, 0.1);
-        border: 1px solid rgba(138, 180, 248, 0.3);
-    }
-    
-    .back-icon {
-        color: #1a5fa0;
-    }
-    
-    .currency-display {
-        background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
-        border: 1px solid rgba(138, 43, 226, 0.2);
-        color: #333;
-    }
-    
-    .currency-icon {
-        color: #ffd700;
-    }
-    
-    .mini-btn {
-        background: rgba(138, 180, 248, 0.1);
-        border: 1px solid rgba(138, 180, 248, 0.3);
-        color: #333;
-    }
-    
-    .archive-link {
-        background: rgba(255, 110, 199, 0.1) !important;
-        border: 1px solid rgba(255, 110, 199, 0.3) !important;
-        color: #ff6ec7 !important;
-    }
-    
-    .bonus-panel,
-    .controls-hint,
-    .compact-modal-content {
-        background: rgba(255, 255, 255, 0.95);
-        border-color: #ddd;
-        color: #333;
-    }
-    
-    .compact-card {
-        background: rgba(240, 240, 240, 0.9);
-    }
-}
-
-/* Специальные стили для очень высоких экранов */
-@media (min-height: 800px) and (max-width: 768px) {
-    .bonus-panel {
-        max-height: 180px;
-    }
-    
-    .compact-modal-content {
-        max-height: 75vh;
-    }
-    
-    .compact-cards-container {
-        max-height: 60vh;
     }
 }
 
@@ -3153,7 +3148,7 @@ textarea {
     }
 }
 
-/* Оптимизация для темной темы */
+/* Оптимизация для темной темы - ВСЕГДА ТЕМНАЯ */
 @media (prefers-color-scheme: dark) {
     .stars {
         background: #050a19;

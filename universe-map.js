@@ -1452,8 +1452,14 @@ class UniverseMap {
             document.body.style.overflow = 'hidden';
         }
         
+        // ИСПРАВЛЕНИЕ ПРОКРУТКИ - ДОБАВЛЯЕМ КЛАСС ДЛЯ ПРОКРУТКИ
         setTimeout(() => {
             this.checkTabsScrollHint();
+            
+            // Добавляем класс для исправления прокрутки на мобильных
+            if (cardsContainer && this.isMobile) {
+                cardsContainer.classList.add('modal-touch-fix');
+            }
         }, 100);
     }
     
@@ -1967,6 +1973,12 @@ class UniverseMap {
         const modal = document.getElementById('compact-selection-modal');
         if (modal) {
             modal.classList.remove('active');
+            
+            // Убираем класс для прокрутки
+            const cardsContainer = document.getElementById('compact-cards-container');
+            if (cardsContainer) {
+                cardsContainer.classList.remove('modal-touch-fix');
+            }
         }
         this.currentSelection = null;
         
@@ -2016,14 +2028,41 @@ class UniverseMap {
         
         sunPlaceholder.style.display = 'none';
         currentSun.style.display = 'block';
-        currentSun.style.width = `${sunData.size}px`;
-        currentSun.style.height = `${sunData.size}px`;
-        currentSun.style.background = `radial-gradient(circle, ${sunData.color}, ${this.darkenColor(sunData.color, 0.3)})`;
-        currentSun.style.boxShadow = `0 0 50px ${sunData.color}`;
-        centralArea.classList.add('has-sun');
-        centralArea.classList.remove('no-sun');
         
+        // ИСПРАВЛЕНИЕ РАСТЯГИВАНИЯ - ГАРАНТИРУЕМ КРУГЛУЮ ФОРМУ
+        currentSun.style.cssText = `
+            width: ${sunData.size}px;
+            height: ${sunData.size}px;
+            min-width: ${sunData.size}px;
+            min-height: ${sunData.size}px;
+            max-width: ${sunData.size}px;
+            max-height: ${sunData.size}px;
+            border-radius: 50%;
+            background: radial-gradient(circle, ${sunData.color}, ${this.darkenColor(sunData.color, 0.3)});
+            box-shadow: 0 0 50px ${sunData.color};
+            aspect-ratio: 1 / 1;
+            --size: ${sunData.size}px;
+            position: relative;
+            cursor: pointer;
+            animation: pulse-sun 3s ease-in-out infinite alternate;
+            transform-origin: center;
+            transform: translateZ(0);
+            will-change: transform;
+            display: block;
+        `;
+        
+        // Добавляем свечение обратно
         currentSun.innerHTML = `
+            <div style="
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: ${sunData.size + 40}px;
+                height: ${sunData.size + 40}px;
+                background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent 70%);
+                border-radius: 50%;
+            "></div>
             <div class="sun-info" style="
                 position: absolute;
                 top: -30px;
@@ -2037,6 +2076,9 @@ class UniverseMap {
                 border: 1px solid ${sunData.color};
             ">${sunData.name}</div>
         `;
+        
+        centralArea.classList.add('has-sun');
+        centralArea.classList.remove('no-sun');
         
         this.universeState.sun = sunData;
         this.updateSystemInfo();
@@ -2065,16 +2107,27 @@ class UniverseMap {
         
         const planetVisual = document.createElement('div');
         planetVisual.className = `planet-visual ${planetData.type}`;
+        
+        // ИСПРАВЛЕНИЕ РАСТЯГИВАНИЯ - ГАРАНТИРУЕМ КРУГЛУЮ ФОРМУ
         planetVisual.style.cssText = `
             width: ${planetData.size}px;
             height: ${planetData.size}px;
+            min-width: ${planetData.size}px;
+            min-height: ${planetData.size}px;
+            max-width: ${planetData.size}px;
+            max-height: ${planetData.size}px;
             border-radius: 50%;
             background: radial-gradient(circle, ${planetData.color}, ${this.darkenColor(planetData.color, 0.3)});
             box-shadow: 0 0 20px ${planetData.color};
+            aspect-ratio: 1 / 1;
+            --size: ${planetData.size}px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation: float-planet 4s ease-in-out infinite alternate;
+            z-index: 160;
+            will-change: transform;
         `;
         
         planetVisual.dataset.planetId = planetData.id;
