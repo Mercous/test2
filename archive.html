@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архив Реликвий | Космогенезис</title>
+    <link rel="stylesheet" href="archive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body class="archive-page">
+    <!-- Космический фон -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <!-- Шапка -->
+    <header class="archive-header" role="banner" aria-label="Архив реликвий">
+        <div class="header-left" role="navigation" aria-label="Навигация">
+            <a href="universe-map.html" class="back-button" aria-label="Вернуться к карте вселенной">
+                <span class="back-button-icon" aria-hidden="true">←</span>
+                <span class="back-button-text">К КАРТЕ</span>
+            </a>
+        </div>
+        
+        <div class="header-center" role="heading" aria-level="1">
+            <h1 class="header-title" tabindex="0">
+                <span class="title-text">АРХИВ</span>
+                <span class="title-subtext">РЕЛИКВИЙ</span>
+            </h1>
+        </div>
+        
+        <div class="header-right" role="status" aria-label="Баланс валюты">
+            <div class="currency-display" aria-live="polite" aria-label="Количество Хроноса">
+                <span class="currency-icon" aria-hidden="true">⏳</span>
+                <span id="chronos-amount" class="currency-amount">1000</span>
+                <span class="currency-label">ХРОНОС</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="archive-main">
+        <!-- Навигация по разделам -->
+        <nav class="archive-nav">
+            <button class="nav-tab active" data-tab="missions">⚡ ЗАДАНИЯ</button>
+            <button class="nav-tab" data-tab="shop">🛒 МАГАЗИН</button>
+            <button class="nav-tab" data-tab="inventory">🎴 ИНВЕНТАРЬ</button>
+            <button class="nav-tab" data-tab="boosters">🚀 УСИЛИТЕЛИ</button>
+        </nav>
+
+        <!-- Контейнер контента -->
+        <div class="archive-content">
+            <!-- Раздел ЗАДАНИЯ -->
+            <section class="tab-content active" id="missions-tab">
+                <h2 class="section-title">⚡ ЗАДАНИЯ ДЛЯ ОТКРЫТИЯ ОРБИТ</h2>
+                
+                <div class="missions-grid">
+                    <div class="mission-card" data-mission="orbit-3">
+                        <div class="mission-header">
+                            <h3>ОРБИТА 3</h3>
+                            <span class="mission-price">150 ХРОНОС</span>
+                        </div>
+                        <div class="mission-status">
+                            <div class="status-badge requirements-not-met">❌ УСЛОВИЯ НЕ ВЫПОЛНЕНЫ</div>
+                        </div>
+                        <div class="mission-requirements">
+                            <p>📋 Требования:</p>
+                            <ul>
+                                <li class="requirement-not-met">
+                                    ⭐ Солнце: Любое
+                                </li>
+                                <li class="requirement-not-met">
+                                    🪐 Планеты: 2 газовых гиганта
+                                </li>
+                                <li class="requirement-not-met">
+                                    ⚖️ Баланс системы: ≥ 200
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mission-reward">
+                            <p>🎁 Награда: Открытие 3-й орбиты</p>
+                        </div>
+                        <button class="buy-button" data-mission="orbit-3" disabled>УСЛОВИЯ НЕ ВЫПОЛНЕНЫ</button>
+                        <div class="mission-hint">⚠️ Выполните требования системы для открытия орбиты</div>
+                    </div>
+
+                    <div class="mission-card" data-mission="orbit-4">
+                        <div class="mission-header">
+                            <h3>ОРБИТА 4</h3>
+                            <span class="mission-price">300 ХРОНОС</span>
+                        </div>
+                        <div class="mission-status">
+                            <div class="status-badge requirements-not-met">❌ УСЛОВИЯ НЕ ВЫПОЛНЕНЫ</div>
+                        </div>
+                        <div class="mission-requirements">
+                            <p>📋 Требования:</p>
+                            <ul>
+                                <li class="requirement-not-met">
+                                    ⭐ Солнце: Голубой гигант
+                                </li>
+                                <li class="requirement-not-met">
+                                    🪐 Планеты: 1 лавовый мир + 1 океанический
+                                </li>
+                                <li class="requirement-not-met">
+                                    ⚖️ Баланс системы: ≥ 350
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mission-reward">
+                            <p>🎁 Награда: Открытие 4-й орбиты</p>
+                        </div>
+                        <button class="buy-button" data-mission="orbit-4" disabled>УСЛОВИЯ НЕ ВЫПОЛНЕНЫ</button>
+                        <div class="mission-hint">⚠️ Выполните требования системы для открытия орбиты</div>
+                    </div>
+
+                    <div class="mission-card" data-mission="orbit-5">
+                        <div class="mission-header">
+                            <h3>ОРБИТА 5</h3>
+                            <span class="mission-price">500 ХРОНОС</span>
+                        </div>
+                        <div class="mission-status">
+                            <div class="status-badge requirements-not-met">❌ УСЛОВИЯ НЕ ВЫПОЛНЕНЫ</div>
+                        </div>
+                        <div class="mission-requirements">
+                            <p>📋 Требования:</p>
+                            <ul>
+                                <li class="requirement-not-met">
+                                    ⭐ Солнце: Нейтронная звезда
+                                </li>
+                                <li class="requirement-not-met">
+                                    🪐 Планеты: 3 кристальных мира
+                                </li>
+                                <li class="requirement-not-met">
+                                    ⚖️ Баланс системы: ≥ 500
+                                </li>
+                                <li class="requirement-not-met">
+                                    ⚡ Общая мощь: ≥ 800
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mission-reward">
+                            <p>🎁 Награда: Открытие 5-й орбиты + редкая планета</p>
+                        </div>
+                        <button class="buy-button" data-mission="orbit-5" disabled>УСЛОВИЯ НЕ ВЫПОЛНЕНЫ</button>
+                        <div class="mission-hint">⚠️ Выполните требования системы для открытия орбиты</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Раздел МАГАЗИН -->
+            <section class="tab-content" id="shop-tab">
+                <h2 class="section-title">🛒 МАГАЗИН РЕЛИКВИЙ</h2>
+                
+                <!-- Таймеры обновления -->
+                <div class="refresh-timers">
+                    <div class="timer-card">
+                        <span class="timer-icon">🪐</span>
+                        <div class="timer-info">
+                            <h4>ПЛАНЕТЫ</h4>
+                            <p>Обновление через: <span id="planets-timer">15:00</span></p>
+                        </div>
+                    </div>
+                    <div class="timer-card">
+                        <span class="timer-icon">⭐</span>
+                        <div class="timer-info">
+                            <h4>СОЛНЦЕ</h4>
+                            <p>Обновление через: <span id="sun-timer">30:00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карта вселенной магазина -->
+                <div class="universe-map-shop">
+                    <!-- Контейнер для солнца -->
+                    <div class="shop-sun-container" id="shop-sun-container">
+                        <!-- Солнце будет добавляться динамически -->
+                    </div>
+
+                    <!-- Контейнер для планет -->
+                    <div id="shop-planets-container">
+                        <!-- Планеты будут добавляться динамически -->
+                    </div>
+                </div>
+
+                <!-- Информация о выбранном объекте -->
+                <div class="shop-selection-info" id="shop-selection-info">
+                    <div class="selection-placeholder">
+                        <p>🌌 Выберите планету или солнце на карте для покупки</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Раздел ИНВЕНТАРЬ -->
+            <section class="tab-content" id="inventory-tab">
+                <h2 class="section-title">🎴 ИНВЕНТАРЬ КАРТ</h2>
+                
+                <div class="inventory-filters">
+                    <button class="filter-btn active" data-filter="all">ВСЕ</button>
+                    <button class="filter-btn" data-filter="suns">СОЛНЦА</button>
+                    <button class="filter-btn" data-filter="planets">ПЛАНЕТЫ</button>
+                    <button class="filter-btn" data-filter="rare">РЕДКИЕ</button>
+                </div>
+
+                <div class="inventory-grid">
+                    <div class="inventory-stats">
+                        <div class="stat-card">
+                            <h4>ВСЕГО КАРТ</h4>
+                            <span id="total-cards">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h4>СОЛНЦА</h4>
+                            <span id="suns-count">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h4>ПЛАНЕТЫ</h4>
+                            <span id="planets-count">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h4>РЕДКИЕ</h4>
+                            <span id="rare-count">0</span>
+                        </div>
+                    </div>
+
+                    <div class="cards-container" id="cards-container">
+                        <!-- Карты будут добавляться через JavaScript -->
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text); opacity: 0.7;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+                            <div style="font-size: 0.7rem; margin-bottom: 0.5rem;">ИНВЕНТАРЬ ПУСТ</div>
+                            <div style="font-size: 0.5rem;">Посетите магазин чтобы приобрести карты</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Раздел УСИЛИТЕЛИ -->
+            <section class="tab-content" id="boosters-tab">
+                <h2 class="section-title">🚀 УСИЛИТЕЛИ УДАЧИ</h2>
+                
+                <div class="boosters-grid">
+                    <div class="booster-card">
+                        <div class="booster-icon">🍀</div>
+                        <div class="booster-info">
+                            <h3>УСИЛИТЕЛЬ УДАЧИ I</h3>
+                            <p>+10% к шансу редких планет</p>
+                            <div class="booster-duration">⏱️ 24 часа</div>
+                        </div>
+                        <div class="booster-price">150 ХРОНОС</div>
+                        <button class="buy-booster" data-booster="luck-1">АКТИВИРОВАТЬ</button>
+                    </div>
+
+                    <div class="booster-card">
+                        <div class="booster-icon">🌈</div>
+                        <div class="booster-info">
+                            <h3>УСИЛИТЕЛЬ УДАЧИ II</h3>
+                            <p>+25% к шансу редких планет и солнц</p>
+                            <div class="booster-duration">⏱️ 24 часа</div>
+                        </div>
+                        <div class="booster-price">300 ХРОНОС</div>
+                        <button class="buy-booster" data-booster="luck-2">АКТИВИРОВАТЬ</button>
+                    </div>
+
+                    <div class="booster-card">
+                        <div class="booster-icon">👑</div>
+                        <div class="booster-info">
+                            <h3>ЗОЛОТАЯ ЛИХОРАДКА</h3>
+                            <p>+50% к шансу всех редких карт</p>
+                            <div class="booster-duration">⏱️ 12 часа</div>
+                        </div>
+                        <div class="booster-price">500 ХРОНОС</div>
+                        <button class="buy-booster" data-booster="gold-rush">АКТИВИРОВАТЬ</button>
+                    </div>
+
+                    <div class="booster-card">
+                        <div class="booster-icon">⚡</div>
+                        <div class="booster-info">
+                            <h3>БУСТЕР ОПЫТА</h3>
+                            <p>+100% к получаемому Хроносу</p>
+                            <div class="booster-duration">⏱️ 8 часов</div>
+                        </div>
+                        <div class="booster-price">200 ХРОНОС</div>
+                        <button class="buy-booster" data-booster="xp-boost">АКТИВИРОВАТЬ</button>
+                    </div>
+                </div>
+
+                <div class="active-boosters">
+                    <h3>АКТИВНЫЕ УСИЛИТЕЛИ</h3>
+                    <div id="active-boosters-list">
+                        <p style="text-align: center; font-size: 0.6rem; opacity: 0.7;">Нет активных усилителей</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Модальное окно покупки -->
+    <div class="modal" id="purchase-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">ПОДТВЕРЖДЕНИЕ ПОКУПКИ</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message">Вы уверены, что хотите купить этот предмет?</p>
+                <div class="modal-price">
+                    Стоимость: <span id="modal-price-amount">0</span> ХРОНОС
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel">ОТМЕНА</button>
+                <button class="modal-btn confirm">ПОДТВЕРДИТЬ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div class="notification" id="notification">
+        <span id="notification-text"></span>
+    </div>
+
+    <!-- Подключаем файлы данных -->
+    <script src="data/suns-data.js"></script>
+    <script src="data/planets-data.js"></script>
+    <script src="game-data-manager.js"></script>
+    <script src="archive.js"></script>
+</body>
+</html>

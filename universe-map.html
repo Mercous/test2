@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Карта Вселенной | Космогенезис</title>
+    <link rel="stylesheet" href="universe-map.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body class="universe-map-page">
+    <!-- Космический фон с яркими звездами -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="bright-stars"></div>
+    <div class="nebula-background"></div>
+    
+    <!-- Шапка -->
+    <header class="map-header">
+        <div class="header-left">
+            <a href="index.html" class="back-button">
+                <span class="back-icon">←</span>
+                <span class="back-text">НАЗАД</span>
+            </a>
+        </div>
+        <div class="header-center">
+            <span class="header-title">КАРТА ВСЕЛЕННОЙ</span>
+        </div>
+        <div class="header-right">
+            <div class="currency-display" id="currency-display" title="Хронос">
+                <span class="currency-icon">⏳</span>
+                <span class="currency-amount" id="chronos-amount">0</span>
+                <span class="currency-per-minute" id="chronos-per-minute">+0/мин</span>
+            </div>
+            <div class="mini-controls">
+                <button class="mini-btn" id="zoom-out" title="Уменьшить">-</button>
+                <span class="zoom-level" id="zoom-level">100%</span>
+                <button class="mini-btn" id="zoom-in" title="Увеличить">+</button>
+                <button class="mini-btn" id="reset-view" title="Сбросить вид">⟳</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основная карта вселенной -->
+    <main class="universe-map-main">
+        <div class="universe-map-container" id="map-container">
+            <div class="universe-map" id="universe-map">
+                <!-- Центральная область для солнца -->
+                <div class="central-area" id="central-area">
+                    <div class="sun-placeholder" id="sun-placeholder">
+                        <div class="placeholder-text">КЛИКНИТЕ ДЛЯ<br>ВЫБОРА СОЛНЦА</div>
+                        <div class="placeholder-icon">⭐</div>
+                    </div>
+                    
+                    <!-- Текущее солнце -->
+                    <div class="current-sun" id="current-sun"></div>
+                </div>
+
+                <!-- Орбитальные кольца -->
+                <div class="orbit-ring orbit-1">
+                    <div class="orbit-line"></div>
+                </div>
+
+                <div class="orbit-ring orbit-2">
+                    <div class="orbit-line"></div>
+                </div>
+
+                <div class="orbit-ring orbit-3">
+                    <div class="orbit-line"></div>
+                </div>
+
+                <div class="orbit-ring orbit-4">
+                    <div class="orbit-line"></div>
+                </div>
+
+                <div class="orbit-ring orbit-5">
+                    <div class="orbit-line"></div>
+                </div>
+                
+                <!-- Слоты для планет будут добавлены динамически -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Панель бонусов и статистики -->
+    <div class="bonus-panel">
+        <div class="bonus-section">
+            <h4>БОНУСЫ СИСТЕМЫ</h4>
+            <div class="bonus-list" id="bonus-list">
+                <div class="bonus-item">Стабильность: <span id="stability-bonus">0%</span></div>
+                <div class="bonus-item">Энергия: <span id="energy-bonus">0%</span></div>
+                <div class="bonus-item">Баланс: <span id="balance-bonus">0%</span></div>
+                <div class="bonus-item">Хронос/мин: <span id="chronos-income">0</span></div>
+            </div>
+        </div>
+        <div class="stats-section">
+            <h4>СТАТИСТИКА</h4>
+            <div class="stats-list">
+                <div class="stat-item">Мощь: <span id="system-power">0</span></div>
+                <div class="stat-item">Планет: <span id="planets-count">0</span></div>
+                <div class="stat-item">Орбит: <span id="active-orbits">0</span></div>
+                <div class="stat-item">Доход: <span id="total-income">0/мин</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подсказка управления -->
+    <div class="controls-hint">
+        <div class="hint-item">🖱️ ЛКМ - Выбрать объект</div>
+        <div class="hint-item">🖱️ ПКМ + Движение - Перемещение</div>
+        <div class="hint-item">🔄 Колесо - Масштаб</div>
+        <div class="hint-item">⏳ Хронос: пассивный доход за вселенную!</div>
+    </div>
+
+    <!-- Сообщение о загрузке -->
+    <div id="loading-message">
+        ЗАГРУЗКА КАРТЫ ВСЕЛЕННОЙ...
+    </div>
+
+    <!-- Подключаем файлы данных -->
+    <script src="data/suns-data.js"></script>
+    <script src="data/planets-data.js"></script>
+    <script src="game-data-manager.js"></script>
+    <script src="universe-map.js"></script>
+</body>
+</html>

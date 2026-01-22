@@ -1,0 +1,3218 @@
+/* universe-map.css - ОПТИМИЗИРОВАН ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+
+/* Базовые стили для страницы карты */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #8a2be2;
+    --secondary: #1a5fa0;
+    --accent: #ff6ec7;
+    --neon-blue: #87f5ff;
+    --dark-bg: #0a0a16;
+    --darker-bg: #050a19;
+    --text: #e0e0ff;
+    --chronos-gold: #ffd700;
+    --income-green: #39ff14;
+    --modal-bg: rgba(15, 20, 40, 0.95);
+    --modal-border: rgba(135, 245, 255, 0.2);
+    --mobile-breakpoint: 768px;
+    --phone-breakpoint: 480px;
+}
+
+.universe-map-page {
+    font-family: 'Press Start 2P', cursive;
+    background: var(--darker-bg);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    font-size: 10px;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* ==================== ЯРКИЙ КОСМИЧЕСКИЙ ФОН ==================== */
+
+/* Базовый фон с яркими звездами */
+.stars, .twinkling, .nebula-background, .bright-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+}
+
+/* Базовый звездный фон с яркими звездами */
+.stars {
+    background: 
+        radial-gradient(ellipse at 50% 50%, rgba(20, 30, 60, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 110, 199, 0.1) 0%, transparent 40%),
+        linear-gradient(45deg, #050a19 0%, #0a0a16 50%, #050a19 100%);
+}
+
+/* Яркие анимированные звезды для десктопа */
+.twinkling {
+    background-image: 
+        /* Мелкие яркие звезды */
+        radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 30% 40%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+        radial-gradient(2px 2px at 50% 60%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 70% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+        radial-gradient(2px 2px at 90% 80%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        /* Дополнительные яркие звезды */
+        radial-gradient(3px 3px at 15% 35%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(2.5px 2.5px at 40% 65%, rgba(255, 255, 255, 0.95) 0%, transparent 100%),
+        radial-gradient(3px 3px at 65% 25%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(2.5px 2.5px at 85% 55%, rgba(255, 255, 255, 0.95) 0%, transparent 100%),
+        radial-gradient(3px 3px at 25% 85%, rgba(255, 255, 255, 1) 0%, transparent 100%);
+    background-size: 300px 300px, 400px 400px, 500px 500px, 600px 600px, 700px 700px,
+                     350px 350px, 450px 450px, 550px 550px, 650px 650px, 750px 750px;
+    animation: twinkle-mobile 50s linear infinite;
+    opacity: 0.9;
+}
+
+/* Яркие статичные звезды */
+.bright-stars {
+    background-image: 
+        radial-gradient(4px 4px at 20% 30%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(5px 5px at 45% 70%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(3px 3px at 75% 40%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        radial-gradient(6px 6px at 60% 20%, rgba(255, 215, 0, 0.8) 0%, transparent 100%),
+        radial-gradient(4px 4px at 35% 80%, rgba(135, 245, 255, 0.7) 0%, transparent 100%),
+        radial-gradient(5px 5px at 80% 60%, rgba(255, 110, 199, 0.6) 0%, transparent 100%);
+    background-size: 800px 800px, 900px 900px, 1000px 1000px, 1100px 1100px, 1200px 1200px, 1300px 1300px;
+    animation: very-slow-drift 200s linear infinite;
+    opacity: 0.7;
+}
+
+/* Туманности для десктопа */
+.nebula-background {
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 110, 199, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 40% 70%, rgba(135, 245, 255, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 60% 90%, rgba(255, 215, 0, 0.08) 0%, transparent 55%);
+    animation: nebula-move-slow 120s linear infinite;
+    opacity: 0.6;
+    mix-blend-mode: screen;
+}
+
+/* Медленные анимации для лучшей производительности */
+@keyframes twinkle {
+    0% { opacity: 0.7; transform: translateY(0) scale(1); }
+    50% { opacity: 1; transform: translateY(-5px) scale(1.1); }
+    100% { opacity: 0.7; transform: translateY(0) scale(1); }
+}
+
+@keyframes twinkle-mobile {
+    0% { transform: translateX(0) translateY(0); opacity: 0.8; }
+    25% { transform: translateX(-50px) translateY(20px); opacity: 0.9; }
+    50% { transform: translateX(-100px) translateY(0); opacity: 1; }
+    75% { transform: translateX(-50px) translateY(-20px); opacity: 0.9; }
+    100% { transform: translateX(0) translateY(0); opacity: 0.8; }
+}
+
+@keyframes very-slow-drift {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(-100px) translateY(50px); }
+}
+
+@keyframes nebula-move-slow {
+    0% { transform: scale(1) rotate(0deg); opacity: 0.5; filter: brightness(1); }
+    50% { transform: scale(1.05) rotate(90deg); opacity: 0.7; filter: brightness(1.2); }
+    100% { transform: scale(1) rotate(180deg); opacity: 0.5; filter: brightness(1); }
+}
+
+/* ШАПКА - ГАРМОНИЧНАЯ ВЕРСИЯ */
+.map-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(10, 15, 35, 0.98) 0%, rgba(5, 10, 25, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(135, 245, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    z-index: 1000;
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.header-left,
+.header-center,
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Левая часть - кнопка назад */
+.header-left {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.back-button {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.6rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(138, 180, 248, 0.1);
+    border: 1px solid rgba(138, 180, 248, 0.3);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-family: 'Press Start 2P', cursive;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.back-button:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(255, 110, 199, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 110, 199, 0.2);
+}
+
+.back-icon {
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+}
+
+.back-text {
+    font-size: 0.55rem;
+}
+
+/* Центральная часть - заголовок */
+.header-center {
+    flex: 2;
+    justify-content: center;
+    position: relative;
+}
+
+.header-title {
+    font-size: 0.7rem;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(135, 245, 255, 0.5);
+    padding: 0.4rem 0.8rem;
+    background: rgba(135, 245, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(135, 245, 255, 0.2);
+    letter-spacing: 1px;
+}
+
+/* Правая часть - валюта и элементы управления */
+.header-right {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    flex-wrap: nowrap;
+    overflow: visible;
+}
+
+/* Стили для отображения валюты */
+.currency-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.3) 0%, rgba(255, 215, 0, 0.2) 100%);
+    border: 1px solid var(--primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.6rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    white-space: nowrap;
+    min-width: fit-content;
+}
+
+.currency-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.currency-display:hover::before {
+    left: 100%;
+}
+
+.currency-display:hover {
+    border-color: var(--chronos-gold);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.currency-icon {
+    color: var(--chronos-gold);
+    font-size: 0.8rem;
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+.currency-amount {
+    color: var(--text);
+    font-weight: bold;
+    min-width: 40px;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.currency-per-minute {
+    color: var(--income-green);
+    font-size: 0.5rem;
+    opacity: 0.9;
+    white-space: nowrap;
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+}
+
+@keyframes pulse-glow {
+    0% { 
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+    100% { 
+        transform: scale(1.1);
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.4);
+    }
+}
+
+/* Мини-контролы */
+.mini-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.mini-btn {
+    background: rgba(138, 180, 248, 0.15);
+    border: 1px solid rgba(138, 180, 248, 0.4);
+    color: var(--text);
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.mini-btn:hover {
+    background: rgba(255, 110, 199, 0.2);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(255, 110, 199, 0.2);
+}
+
+.zoom-level {
+    font-size: 0.6rem;
+    color: var(--neon-blue);
+    min-width: 40px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    flex-shrink: 0;
+    background: rgba(135, 245, 255, 0.05);
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid rgba(135, 245, 255, 0.1);
+}
+
+/* Ссылка в архив */
+.archive-link {
+    margin-left: 10px !important;
+    flex-shrink: 0;
+    background: rgba(255, 110, 199, 0.1) !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--accent) !important;
+    transition: all 0.3s ease;
+}
+
+.archive-link:hover {
+    background: rgba(255, 110, 199, 0.2) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 110, 199, 0.2);
+}
+
+/* Анимация получения хроноса */
+.chronos-gain {
+    position: fixed;
+    color: var(--chronos-gold);
+    font-size: 0.7rem;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 3000;
+    animation: floatUp 2s ease-out forwards;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid var(--chronos-gold);
+    font-family: 'Press Start 2P', cursive;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-25px) scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.2);
+    }
+}
+
+/* Основная карта */
+.universe-map-main {
+    height: calc(100vh - 50px);
+    padding-top: 50px;
+    position: relative;
+    overflow: hidden;
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+}
+
+.universe-map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+}
+
+.universe-map-container.grabbing {
+    cursor: grabbing;
+}
+
+.universe-map {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    will-change: transform;
+    transform-origin: center center;
+}
+
+/* Центральная область для солнца */
+.central-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    border: 3px dashed rgba(138, 180, 248, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.central-area:hover {
+    border-color: var(--accent);
+    background: rgba(255, 110, 199, 0.1);
+}
+
+.central-area.has-sun {
+    border: 3px solid rgba(255, 215, 0, 0.7);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.central-area.no-sun {
+    border: 3px dashed #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    animation: pulse-warning 2s ease-in-out infinite;
+}
+
+.sun-placeholder {
+    text-align: center;
+    color: rgba(138, 180, 248, 0.7);
+    font-family: 'Press Start 2P', cursive;
+    padding: 1rem;
+}
+
+.placeholder-text {
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+.placeholder-icon {
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+/* Текущее солнце */
+.current-sun {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    animation: pulse-sun 3s ease-in-out infinite alternate;
+    transform-origin: center;
+    display: none;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.current-sun::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent 70%);
+    border-radius: 50%;
+    animation: rotate 30s linear infinite;
+}
+
+/* Орбитальные кольца с вращением */
+.orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    transform-origin: center;
+    will-change: transform;
+}
+
+/* Десктопные размеры (по умолчанию) */
+.orbit-1 { 
+    width: 400px;   /* радиус 200px × 2 */
+    height: 400px; 
+    animation: rotate-orbit-1 80s linear infinite;
+}
+
+.orbit-2 { 
+    width: 700px;   /* радиус 350px × 2 */
+    height: 700px; 
+    animation: rotate-orbit-2 120s linear infinite;
+}
+
+.orbit-3 { 
+    width: 1000px;  /* радиус 500px × 2 */
+    height: 1000px; 
+    animation: rotate-orbit-3 160s linear infinite;
+}
+
+.orbit-4 { 
+    width: 1300px;  /* радиус 650px × 2 */
+    height: 1300px; 
+    animation: rotate-orbit-4 200s linear infinite;
+}
+
+.orbit-5 { 
+    width: 1600px;  /* радиус 800px × 2 */
+    height: 1600px; 
+    animation: rotate-orbit-5 240s linear infinite;
+}
+
+.orbit-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(138, 180, 248, 0.3);
+    border-radius: 50%;
+}
+
+/* Анимации вращения орбит */
+@keyframes rotate-orbit-1 {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes rotate-orbit-2 {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes rotate-orbit-3 {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes rotate-orbit-4 {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes rotate-orbit-5 {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Слоты для планет */
+.planet-slots {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.planet-slot {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(138, 180, 248, 0.1);
+    border: 2px dashed rgba(138, 180, 248, 0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+    transform-origin: center;
+    pointer-events: auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.planet-slot:hover {
+    background: rgba(255, 110, 199, 0.2);
+    border-color: var(--accent);
+    border-style: solid;
+    transform: scale(1.1);
+}
+
+.planet-slot.occupied {
+    background: rgba(135, 245, 255, 0.2);
+    border: 2px solid var(--neon-blue);
+    border-style: solid;
+}
+
+.planet-slot.disabled {
+    background: rgba(255, 68, 68, 0.1);
+    border: 2px dashed #ff4444;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.planet-slot.disabled:hover {
+    background: rgba(255, 0, 0, 0.2) !important;
+    transform: none !important;
+    border-color: #ff4444 !important;
+}
+
+.planet-slot.disabled .slot-number {
+    opacity: 0.3;
+}
+
+.planet-slot .slot-number {
+    font-size: 0.6rem;
+    color: var(--text);
+    opacity: 0.7;
+    pointer-events: none;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.orbit-lock {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+/* Визуализация планет */
+.planet-visual {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: float-planet 4s ease-in-out infinite alternate;
+    z-index: 160;
+    will-change: transform;
+}
+
+.planet-visual.rocky {
+    background: radial-gradient(circle, #8B4513, #654321, #3D2B1F);
+    box-shadow: 0 0 15px #8B4513;
+}
+
+.planet-visual.gas {
+    background: radial-gradient(circle, #87CEEB, #4682B4, #1E90FF);
+    box-shadow: 0 0 20px #87CEEB;
+}
+
+.planet-visual.ice {
+    background: radial-gradient(circle, #F0F8FF, #B0E0E6, #87CEFA);
+    box-shadow: 0 0 15px #F0F8FF;
+}
+
+.planet-visual.lava {
+    background: radial-gradient(circle, #FF4500, #DC143C, #8B0000);
+    box-shadow: 0 0 20px #FF4500;
+}
+
+.planet-visual.ocean {
+    background: radial-gradient(circle, #1E90FF, #0000FF, #000080);
+    box-shadow: 0 0 15px #1E90FF;
+}
+
+.planet-visual.desert {
+    background: radial-gradient(circle, #D2B48C, #CD853F, #8B4513);
+    box-shadow: 0 0 15px #D2B48C;
+}
+
+.planet-info, .sun-info {
+    animation: fadeIn 0.5s ease;
+    font-family: 'Press Start 2P', cursive;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes float-planet {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    100% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Панель бонусов и статистики */
+.bonus-panel {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(10, 15, 35, 0.92);
+    border: 1px solid rgba(138, 180, 248, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.6rem;
+    z-index: 100;
+    display: flex;
+    gap: 2rem;
+    backdrop-filter: blur(10px);
+    font-family: 'Press Start 2P', cursive;
+    -webkit-backdrop-filter: blur(10px);
+    max-width: calc(100% - 2rem);
+    overflow: hidden;
+}
+
+.bonus-section, .stats-section {
+    min-width: 150px;
+}
+
+.bonus-section h4, .stats-section h4 {
+    color: var(--neon-blue);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+}
+
+.bonus-item, .stat-item {
+    margin-bottom: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.bonus-item:last-child, .stat-item:last-child {
+    margin-bottom: 0;
+}
+
+.bonus-item span, .stat-item span {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Специальные стили для отображения дохода */
+#chronos-income {
+    color: var(--income-green) !important;
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+}
+
+#total-income {
+    color: var(--chronos-gold) !important;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Подсказка управления */
+.controls-hint {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(10, 15, 35, 0.92);
+    border: 1px solid rgba(138, 180, 248, 0.3);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-size: 0.5rem;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    font-family: 'Press Start 2P', cursive;
+    -webkit-backdrop-filter: blur(10px);
+    max-width: 250px;
+}
+
+.hint-item {
+    margin-bottom: 0.2rem;
+    color: var(--neon-blue);
+    line-height: 1.3;
+}
+
+.hint-item:last-child {
+    margin-bottom: 0;
+}
+
+/* ==================== ИСПРАВЛЕННОЕ МОДАЛЬНОЕ ОКНО ==================== */
+
+/* КОМПАКТНОЕ МОДАЛЬНОЕ ОКНО ВЫБОРА ПЛАНЕТ */
+.compact-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 0.5rem;
+    overflow: hidden;
+}
+
+.compact-modal.active {
+    display: flex;
+}
+
+.compact-modal-content {
+    background: var(--modal-bg);
+    border: 1px solid var(--modal-border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 650px; /* Увеличено для ПК */
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    animation: modalSlideIn 0.3s ease-out;
+    overflow: hidden;
+}
+
+.compact-modal-header {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--modal-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+    min-height: 60px;
+}
+
+.compact-modal-title {
+    color: var(--neon-blue);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    line-height: 1.3;
+    text-align: center;
+    flex: 1;
+    padding-right: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.compact-close-btn {
+    background: rgba(255, 110, 199, 0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.3rem 0.8rem;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    font-family: 'Press Start 2P', cursive;
+    flex-shrink: 0;
+    min-height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compact-close-btn:hover {
+    opacity: 1;
+    background: rgba(255, 110, 199, 0.2);
+}
+
+/* ОСНОВНОЙ КОНТЕЙНЕР С ТАБАМИ */
+.compact-modal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* ФИЛЬТРЫ И ПОИСК */
+.compact-filters {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--modal-border);
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.compact-search-container {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+}
+
+.compact-search {
+    width: 100%;
+    background: rgba(30, 35, 65, 0.7);
+    border: 1px solid var(--modal-border);
+    color: var(--text);
+    padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+    font-size: 0.6rem;
+    border-radius: 6px;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+}
+
+.compact-search::placeholder {
+    color: rgba(224, 224, 255, 0.5);
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+}
+
+.compact-search-icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    font-size: 0.7rem;
+    opacity: 0.5;
+}
+
+.compact-search-clear {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0.5;
+    padding: 0.3rem;
+    display: none;
+}
+
+.compact-search:not(:placeholder-shown) + .compact-search-clear {
+    display: block;
+}
+
+.compact-filter-btn {
+    background: rgba(30, 35, 65, 0.7);
+    border: 1px solid var(--modal-border);
+    color: var(--text);
+    padding: 0.6rem 0.8rem;
+    font-size: 0.6rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    min-height: 40px;
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.compact-filter-btn.active {
+    opacity: 1;
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    background: rgba(135, 245, 255, 0.15);
+}
+
+.compact-filter-btn:hover {
+    opacity: 1;
+    background: rgba(40, 45, 75, 0.9);
+}
+
+/* СТИЛИ СКРОЛЛБАРА ДЛЯ МОДАЛЬНОГО ОКНА */
+.compact-modal-content ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.compact-modal-content ::-webkit-scrollbar-track {
+    background: rgba(138, 180, 248, 0.1);
+    border-radius: 3px;
+}
+
+.compact-modal-content ::-webkit-scrollbar-thumb {
+    background: var(--modal-border);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.compact-modal-content ::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue);
+}
+
+/* Firefox */
+.compact-modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: var(--modal-border) rgba(138, 180, 248, 0.1);
+}
+
+/* ТАБЫ */
+.compact-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--modal-border);
+    font-family: 'Press Start 2P', cursive;
+    overflow-x: auto;
+    flex-shrink: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--modal-border) rgba(138, 180, 248, 0.1);
+    padding: 0 0.5rem;
+    min-height: 46px;
+}
+
+/* Горизонтальный скроллбар для табов */
+.compact-tabs::-webkit-scrollbar {
+    height: 6px;
+    display: block;
+}
+
+.compact-tabs::-webkit-scrollbar-track {
+    background: rgba(138, 180, 248, 0.1);
+    border-radius: 3px;
+    margin: 0 0.5rem;
+}
+
+.compact-tabs::-webkit-scrollbar-thumb {
+    background: var(--modal-border);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.compact-tabs::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue);
+}
+
+.compact-tab {
+    flex: 0 0 auto;
+    padding: 0.8rem 0.5rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    white-space: nowrap;
+    min-height: 44px;
+    border-bottom: 2px solid transparent;
+    position: relative;
+    min-width: 90px;
+}
+
+.compact-tab.active {
+    opacity: 1;
+    color: var(--neon-blue);
+    background: rgba(135, 245, 255, 0.1);
+    border-bottom: 2px solid var(--neon-blue);
+}
+
+.compact-tab:hover:not(.active) {
+    opacity: 0.8;
+    background: rgba(138, 180, 248, 0.1);
+}
+
+/* Индикатор горизонтального скролла для табов */
+.compact-tabs.has-scroll {
+    position: relative;
+}
+
+@keyframes pulse-hint {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+/* СПИСОК КАРТ */
+.compact-cards-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--modal-border) rgba(138, 180, 248, 0.1);
+}
+
+/* Вертикальный скроллбар для контейнера карт */
+.compact-cards-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.compact-cards-container::-webkit-scrollbar-track {
+    background: rgba(138, 180, 248, 0.1);
+    border-radius: 3px;
+}
+
+.compact-cards-container::-webkit-scrollbar-thumb {
+    background: var(--modal-border);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.compact-cards-container::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue);
+}
+
+/* Карточка карты */
+.compact-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background: rgba(30, 35, 65, 0.7);
+    border: 1px solid var(--modal-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    min-height: 80px;
+    touch-action: manipulation;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.compact-card:hover {
+    background: rgba(40, 45, 75, 0.9);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.compact-card.from-inventory {
+    border-left: 4px solid #39ff14;
+}
+
+/* ПРЕВЬЮ */
+.compact-preview {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px currentColor;
+}
+
+.compact-preview.sun {
+    box-shadow: 0 0 15px #ff4500;
+}
+
+.compact-preview.planet {
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* ИНФОРМАЦИЯ О КАРТЕ */
+.compact-card-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    overflow: hidden;
+}
+
+.compact-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.compact-card-name {
+    font-size: 0.65rem;
+    color: var(--neon-blue);
+    margin: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    word-break: break-word;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.compact-card-power {
+    font-size: 0.6rem;
+    color: var(--accent);
+    background: rgba(255, 110, 199, 0.15);
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--accent);
+    flex-shrink: 0;
+    font-family: 'Press Start 2P', cursive;
+    white-space: nowrap;
+}
+
+/* БЕЙДЖИ */
+.compact-badges {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.compact-badge {
+    font-size: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.compact-badge.inventory {
+    background: rgba(57, 255, 20, 0.15);
+    color: #39ff14;
+    border-color: #39ff14;
+}
+
+.compact-badge.income {
+    background: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+.compact-badge.rarity {
+    background: rgba(138, 43, 226, 0.15);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.compact-badge.common {
+    background: rgba(102, 102, 102, 0.15);
+    color: #aaa;
+    border-color: #666;
+}
+
+.compact-badge.uncommon {
+    background: rgba(30, 144, 255, 0.15);
+    color: #1e90ff;
+    border-color: #1e90ff;
+}
+
+.compact-badge.rare {
+    background: rgba(147, 112, 219, 0.15);
+    color: #9370db;
+    border-color: #9370db;
+}
+
+.compact-badge.epic {
+    background: rgba(255, 69, 0, 0.15);
+    color: #ff4500;
+    border-color: #ff4500;
+}
+
+.compact-badge.legendary {
+    background: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+/* СТАТИСТИКА */
+.compact-stats {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.compact-stat {
+    font-size: 0.55rem;
+    color: var(--text);
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-family: 'Press Start 2P', cursive;
+    white-space: nowrap;
+}
+
+/* ПУСТОЙ ИНВЕНТАРЬ */
+.compact-empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text);
+    width: 100%;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.compact-empty-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.compact-empty-title {
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: var(--neon-blue);
+}
+
+.compact-empty-desc {
+    font-size: 0.6rem;
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    max-width: 300px;
+}
+
+.compact-archive-btn {
+    background: rgba(255, 110, 199, 0.1);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.7rem 1.2rem;
+    font-size: 0.6rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    min-height: 44px;
+    white-space: nowrap;
+}
+
+.compact-archive-btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* СТАРОЕ МОДАЛЬНОЕ ОКНО (СКРЫТО) */
+.selection-modal {
+    display: none;
+}
+
+/* Анимации */
+@keyframes pulse-sun {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.02); }
+}
+
+@keyframes pulse-sun-mobile {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.02); opacity: 1; }
+}
+
+@keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes pulse-warning {
+    0%, 100% { border-color: #ff4444; }
+    50% { border-color: #ff8888; }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Эффект при наведении на карточки */
+.compact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.compact-card:hover::before {
+    left: 100%;
+}
+
+/* Индикатор выбора карты */
+.compact-card.selected {
+    border-color: var(--income-green);
+    background: rgba(57, 255, 20, 0.15);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+}
+
+/* Сообщение о загрузке */
+#loading-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(10, 15, 35, 0.95);
+    color: var(--text);
+    padding: 20px;
+    border: 1px solid var(--modal-border);
+    z-index: 9999;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    text-align: center;
+    display: none;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    max-width: 90%;
+    word-break: break-word;
+}
+
+/* Всплывающие сообщения */
+.universe-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--modal-bg);
+    border: 1px solid var(--modal-border);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.7rem;
+    z-index: 3000;
+    text-align: center;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    animation: messageFade 2s ease-in-out;
+    font-family: 'Press Start 2P', cursive;
+    max-width: 90%;
+    word-break: break-word;
+}
+
+@keyframes messageFade {
+    0% { opacity: 0; transform: translate(-50%, -60%); }
+    20% { opacity: 1; transform: translate(-50%, -50%); }
+    80% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -40%); }
+}
+
+/* Улучшенная доступность */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .stars, .twinkling, .nebula-background, .bright-stars,
+    .orbit-ring, .planet-visual, .current-sun,
+    .chronos-gain, .universe-message {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .orbit-ring {
+        transform: translate(-50%, -50%) !important;
+    }
+    
+    .planet-visual {
+        transform: translate(-50%, -50%) scale(1) !important;
+    }
+    
+    .current-sun {
+        transform: scale(1) !important;
+    }
+}
+
+/* Подсветка фокуса для доступности */
+.compact-card:focus,
+.compact-tab:focus,
+.compact-filter-btn:focus {
+    outline: 2px solid var(--neon-blue);
+    outline-offset: 2px;
+}
+
+.back-button:focus,
+.mini-btn:focus,
+.compact-close-btn:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ==================== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ==================== */
+
+/* Планшеты (до 768px) */
+@media (max-width: 768px) {
+    .universe-map-page {
+        font-size: 9px;
+    }
+    
+    /* Упрощаем фон для планшетов, но оставляем яркие звезды */
+    .stars {
+        background: 
+            radial-gradient(circle at 50% 50%, rgba(20, 30, 60, 0.15) 0%, transparent 60%),
+            linear-gradient(45deg, #050a19 0%, #0a0a16 100%);
+    }
+    
+    /* Меньше звезд, но яркие */
+    .twinkling {
+        background-image: 
+            radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+            radial-gradient(1.5px 1.5px at 60% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+            radial-gradient(2px 2px at 80% 70%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+            radial-gradient(3px 3px at 40% 65%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+            radial-gradient(3px 3px at 65% 25%, rgba(255, 255, 255, 1) 0%, transparent 100%);
+        background-size: 200px 200px, 300px 300px, 400px 400px, 500px 500px, 600px 600px;
+        animation: twinkle-mobile 80s linear infinite;
+        opacity: 0.8;
+    }
+    
+    .bright-stars {
+        opacity: 0.6;
+        animation: very-slow-drift 300s linear infinite;
+    }
+    
+    /* Упрощенные туманности */
+    .nebula-background {
+        background: 
+            radial-gradient(circle at 30% 40%, rgba(138, 43, 226, 0.1) 0%, transparent 60%),
+            radial-gradient(circle at 70% 60%, rgba(135, 245, 255, 0.08) 0%, transparent 50%);
+        animation: nebula-move-slow 150s linear infinite;
+        opacity: 0.5;
+    }
+    
+    /* Уменьшаем скорость анимаций */
+    .orbit-1 { animation-duration: 120s !important; }
+    .orbit-2 { animation-duration: 180s !important; }
+    .orbit-3 { animation-duration: 240s !important; }
+    .orbit-4 { animation-duration: 300s !important; }
+    .orbit-5 { animation-duration: 360s !important; }
+    
+    .current-sun {
+        animation: pulse-sun-mobile 4s ease-in-out infinite alternate !important;
+    }
+    
+    /* ШАПКА ДЛЯ ПЛАНШЕТОВ */
+    .map-header {
+        height: 52px;
+        padding: 0 0.8rem;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(135, 245, 255, 0.15);
+    }
+    
+    .header-left,
+    .header-center,
+    .header-right {
+        flex: none;
+    }
+    
+    .header-left {
+        flex: 0 0 auto;
+        min-width: 60px;
+    }
+    
+    .header-center {
+        flex: 1;
+        justify-content: center;
+        padding: 0 0.5rem;
+    }
+    
+    .header-right {
+        flex: 0 0 auto;
+        gap: 0.6rem;
+    }
+    
+    /* Кнопка назад для планшетов */
+    .back-button {
+        font-size: 0.55rem;
+        padding: 0.4rem 0.6rem;
+        min-width: 60px;
+        gap: 0.3rem;
+        background: rgba(138, 180, 248, 0.08);
+    }
+    
+    .back-icon {
+        font-size: 0.7rem;
+    }
+    
+    .back-text {
+        font-size: 0.5rem;
+    }
+    
+    /* Заголовок для планшетов */
+    .header-title {
+        font-size: 0.65rem;
+        max-width: 180px;
+        padding: 0.5rem 0.6rem;
+        background: rgba(135, 245, 255, 0.03);
+        border: 1px solid rgba(135, 245, 255, 0.15);
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    /* Валютная панель для планшетов */
+    .currency-display {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.55rem;
+        gap: 0.3rem;
+        min-width: 100px;
+        background: linear-gradient(135deg, rgba(138, 43, 226, 0.25) 0%, rgba(255, 215, 0, 0.15) 100%);
+        border: 1px solid rgba(138, 43, 226, 0.3);
+    }
+    
+    .currency-per-minute {
+        font-size: 0.45rem;
+        opacity: 0.8;
+    }
+    
+    .currency-icon {
+        font-size: 0.7rem;
+    }
+    
+    /* Мини-контролы для планшетов */
+    .mini-controls {
+        gap: 0.4rem;
+    }
+    
+    .mini-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 0.65rem;
+        background: rgba(138, 180, 248, 0.12);
+        border: 1px solid rgba(138, 180, 248, 0.3);
+    }
+    
+    .zoom-level {
+        font-size: 0.55rem;
+        min-width: 36px;
+        padding: 0.3rem;
+        background: rgba(135, 245, 255, 0.03);
+        border: 1px solid rgba(135, 245, 255, 0.1);
+    }
+    
+    /* Ссылка в архив для планшетов */
+    .archive-link {
+        margin-left: 4px !important;
+        padding: 0.3rem 0.5rem !important;
+        font-size: 0.55rem;
+        min-width: 60px;
+        text-align: center;
+        background: rgba(255, 110, 199, 0.08) !important;
+        border: 1px solid rgba(255, 110, 199, 0.3) !important;
+    }
+    
+    /* Основная карта */
+    .universe-map-main {
+        padding-top: 52px;
+        height: calc(100vh - 52px);
+    }
+    
+    /* Орбиты меньше */
+    .orbit-1 { 
+        width: 280px !important;   /* радиус 140px × 2 */
+        height: 280px !important; 
+    }
+    
+    .orbit-2 { 
+        width: 450px !important;   /* радиус 225px × 2 */
+        height: 450px !important; 
+    }
+    
+    .orbit-3 { 
+        width: 620px !important;   /* радиус 310px × 2 */
+        height: 620px !important; 
+    }
+    
+    .orbit-4 { 
+        width: 790px !important;   /* радиус 395px × 2 */
+        height: 790px !important; 
+    }
+    
+    .orbit-5 { 
+        width: 960px !important;   /* радиус 480px × 2 */
+        height: 960px !important; 
+    }
+    
+    /* Центральная область */
+    .central-area {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .sun-placeholder .placeholder-text {
+        font-size: 0.6rem;
+        line-height: 1.2;
+    }
+    
+    .placeholder-icon {
+        font-size: 2rem;
+    }
+    
+    .current-sun {
+        width: 140px;
+        height: 140px;
+    }
+    
+    /* Слоты для планет меньше */
+    .planet-slot {
+        width: 50px;
+        height: 50px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .slot-number {
+        font-size: 0.5rem;
+    }
+    
+    /* Планеты меньше */
+    .planet-visual {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    /* Панель бонусов */
+    .bonus-panel {
+        bottom: 0.8rem;
+        left: 0.8rem;
+        right: 0.8rem;
+        padding: 0.8rem;
+        gap: 1.2rem;
+        flex-direction: column;
+        max-height: 160px;
+        overflow-y: auto;
+        border-radius: 8px;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+    
+    .bonus-section, .stats-section {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .bonus-section h4, .stats-section h4 {
+        font-size: 0.55rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .bonus-item, .stat-item {
+        font-size: 0.55rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Подсказка управления */
+    .controls-hint {
+        bottom: 0.8rem;
+        right: 0.8rem;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.45rem;
+        max-width: 200px;
+        display: none;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+    
+    .hint-item {
+        margin-bottom: 0.15rem;
+        line-height: 1.2;
+    }
+    
+    /* МОДАЛЬНОЕ ОКНО ДЛЯ ПЛАНШЕТОВ */
+    .compact-modal {
+        padding: 0.8rem;
+    }
+    
+    .compact-modal-content {
+        max-height: 85vh;
+        border-radius: 12px;
+        max-width: 500px;
+    }
+    
+    .compact-modal-header {
+        padding: 0.8rem 1rem;
+        min-height: 56px;
+    }
+    
+    .compact-modal-title {
+        font-size: 0.65rem;
+    }
+    
+    .compact-filters {
+        padding: 0.7rem 0.9rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .compact-search-container {
+        min-width: 0;
+        width: 100%;
+    }
+    
+    .compact-search {
+        font-size: 0.55rem;
+        padding: 0.5rem 0.7rem 0.5rem 2rem;
+        width: 100%;
+    }
+    
+    .compact-filter-btn {
+        font-size: 0.55rem;
+        padding: 0.5rem;
+        min-height: 42px;
+        width: 100%;
+    }
+    
+    /* Скрываем скроллбар табов на мобильных */
+    .compact-tabs {
+        padding: 0 0.4rem;
+        scrollbar-width: none;
+        padding-bottom: 0;
+    }
+    
+    .compact-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Скрываем индикатор скролла на мобильных */
+    .compact-tabs.has-scroll::after {
+        display: none;
+    }
+    
+    .compact-tab {
+        font-size: 0.55rem;
+        padding: 0.7rem 0.4rem;
+        min-height: 42px;
+        flex: 1;
+        min-width: 80px;
+    }
+    
+    .compact-cards-container {
+        padding: 0.8rem;
+        gap: 0.7rem;
+    }
+    
+    .compact-card {
+        padding: 0.7rem;
+        min-height: 75px;
+    }
+    
+    .compact-preview {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .compact-card-name {
+        font-size: 0.6rem;
+        -webkit-line-clamp: 2;
+    }
+    
+    .compact-card-power {
+        font-size: 0.55rem;
+        padding: 0.25rem 0.4rem;
+    }
+    
+    .compact-badge {
+        font-size: 0.45rem;
+        padding: 0.25rem 0.4rem;
+    }
+    
+    .compact-stat {
+        font-size: 0.5rem;
+    }
+    
+    .compact-empty {
+        padding: 1.5rem 0.8rem;
+    }
+    
+    .compact-empty-icon {
+        font-size: 1.8rem;
+    }
+    
+    .compact-empty-title {
+        font-size: 0.6rem;
+    }
+    
+    .compact-empty-desc {
+        font-size: 0.5rem;
+    }
+    
+    .compact-archive-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.5rem;
+        min-height: 40px;
+    }
+}
+
+/* Телефоны (до 480px) */
+@media (max-width: 480px) {
+    .universe-map-page {
+        font-size: 8px;
+    }
+    
+    /* Минималистичный фон для телефонов, но с яркими звездами */
+    .stars {
+        background: #050a19;
+        background-image: 
+            linear-gradient(180deg, rgba(10, 15, 35, 0.15) 0%, transparent 50%),
+            linear-gradient(45deg, #050a19 0%, #0a0a16 100%);
+    }
+    
+    /* Только самые яркие звезды на телефонах */
+    .twinkling {
+        background-image: 
+            radial-gradient(2px 2px at 20% 40%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+            radial-gradient(1.5px 1.5px at 50% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+            radial-gradient(2px 2px at 80% 60%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+            radial-gradient(3px 3px at 40% 65%, rgba(255, 255, 255, 1) 0%, transparent 100%);
+        background-size: 150px 150px, 200px 200px, 250px 250px, 300px 300px;
+        animation: twinkle-mobile 100s linear infinite;
+        opacity: 0.7;
+    }
+    
+    .bright-stars {
+        opacity: 0.5;
+        animation: very-slow-drift 400s linear infinite;
+    }
+    
+    /* Только одна туманность */
+    .nebula-background {
+        background: radial-gradient(circle at 50% 50%, rgba(135, 245, 255, 0.08) 0%, transparent 70%);
+        animation: nebula-move-slow 200s linear infinite;
+        opacity: 0.4;
+    }
+    
+    /* Еще медленнее анимации орбит */
+    .orbit-1 { animation-duration: 150s !important; }
+    .orbit-2 { animation-duration: 220s !important; }
+    .orbit-3 { animation-duration: 290s !important; }
+    .orbit-4 { animation-duration: 360s !important; }
+    .orbit-5 { animation-duration: 430s !important; }
+    
+    /* Отключаем анимации для планет при слабой производительности */
+    .planet-visual {
+        animation: none !important;
+        transform: translate(-50%, -50%) scale(1) !important;
+    }
+    
+    .current-sun {
+        animation: pulse-sun-mobile 4s ease-in-out infinite alternate !important;
+    }
+    
+    /* ШАПКА ДЛЯ ТЕЛЕФОНОВ */
+    .map-header {
+        height: 56px;
+        padding: 0 0.5rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(135, 245, 255, 0.1);
+    }
+    
+    .header-left {
+        flex: 0 0 auto;
+        min-width: 50px;
+    }
+    
+    .header-center {
+        flex: 1;
+        justify-content: center;
+        padding: 0 0.2rem;
+    }
+    
+    .header-right {
+        flex: 0 0 auto;
+        gap: 0.4rem;
+    }
+    
+    /* Кнопка назад для телефонов */
+    .back-button {
+        font-size: 0;
+        padding: 0.5rem;
+        min-width: 44px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        justify-content: center;
+        background: rgba(138, 180, 248, 0.1);
+        border: 1px solid rgba(138, 180, 248, 0.3);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-button:hover {
+        background: rgba(255, 110, 199, 0.15);
+        border-color: var(--accent);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 4px 12px rgba(255, 110, 199, 0.25);
+    }
+    
+    .back-icon {
+        font-size: 0.9rem;
+        margin: 0;
+        color: var(--neon-blue);
+    }
+    
+    .back-text {
+        display: none;
+    }
+    
+    /* Заголовок для телефонов */
+    .header-title {
+        font-size: 0.6rem;
+        max-width: 150px;
+        padding: 0.5rem 0.5rem;
+        background: rgba(135, 245, 255, 0.02);
+        border: 1px solid rgba(135, 245, 255, 0.1);
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-shadow: 0 0 8px rgba(135, 245, 255, 0.3);
+    }
+    
+    /* Валютная панель для телефонов */
+    .currency-display {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.5rem;
+        gap: 0.3rem;
+        min-width: 80px;
+        background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+        border: 1px solid rgba(138, 43, 226, 0.25);
+        border-radius: 8px;
+    }
+    
+    .currency-per-minute {
+        display: none;
+    }
+    
+    .currency-icon {
+        font-size: 0.65rem;
+    }
+    
+    .currency-amount {
+        min-width: 30px;
+        font-size: 0.55rem;
+    }
+    
+    /* Мини-контролы для телефонов */
+    .mini-controls {
+        display: none;
+    }
+    
+    /* Ссылка в архив для телефонов */
+    .archive-link {
+        margin-left: 0 !important;
+        padding: 0 !important;
+        font-size: 0;
+        min-width: 44px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 110, 199, 0.1) !important;
+        border: 1px solid rgba(255, 110, 199, 0.3) !important;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .archive-link::before {
+        content: '📦';
+        font-size: 1rem;
+        line-height: 1;
+    }
+    
+    .archive-link:hover {
+        background: rgba(255, 110, 199, 0.2) !important;
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 4px 12px rgba(255, 110, 199, 0.25);
+    }
+    
+    .archive-link span {
+        display: none;
+    }
+    
+    /* Основная карта */
+    .universe-map-main {
+        padding-top: 56px;
+        height: calc(100vh - 56px);
+    }
+    
+    /* Орбиты для телефонов */
+    .orbit-1 { 
+        width: 220px !important;   /* радиус 110px × 2 */
+        height: 220px !important; 
+    }
+    
+    .orbit-2 { 
+        width: 350px !important;   /* радиус 175px × 2 */
+        height: 350px !important; 
+    }
+    
+    .orbit-3 { 
+        width: 480px !important;   /* радиус 240px × 2 */
+        height: 480px !important; 
+    }
+    
+    .orbit-4 { 
+        width: 610px !important;   /* радиус 305px × 2 */
+        height: 610px !important; 
+    }
+    
+    .orbit-5 { 
+        width: 740px !important;   /* радиус 370px × 2 */
+        height: 740px !important; 
+    }
+    
+    .central-area {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .placeholder-text {
+        font-size: 0.55rem;
+        line-height: 1.2;
+        padding: 0 0.5rem;
+    }
+    
+    .placeholder-icon {
+        font-size: 1.8rem;
+    }
+    
+    .current-sun {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .planet-slot {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .planet-visual {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    .bonus-panel {
+        bottom: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
+        padding: 0.7rem;
+        max-height: 150px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .bonus-section h4, .stats-section h4 {
+        font-size: 0.5rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .bonus-item, .stat-item {
+        font-size: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    /* МОДАЛЬНОЕ ОКНО ДЛЯ ТЕЛЕФОНОВ */
+    .compact-modal {
+        padding: 0.4rem;
+    }
+    
+    .compact-modal-content {
+        max-height: 90vh;
+        border-radius: 10px;
+        max-width: 100%;
+    }
+    
+    .compact-modal-header {
+        padding: 0.7rem 0.8rem;
+        min-height: 52px;
+        flex-wrap: wrap;
+    }
+    
+    .compact-modal-title {
+        font-size: 0.6rem;
+        white-space: normal;
+        line-height: 1.2;
+        padding-right: 0;
+        margin-bottom: 0.2rem;
+        text-align: left;
+        flex: 1 0 100%;
+        order: 1;
+    }
+    
+    .compact-close-btn {
+        padding: 0.2rem 0.6rem;
+        min-height: 34px;
+        min-width: 34px;
+        font-size: 1rem;
+        order: 2;
+        margin-left: auto;
+    }
+    
+    .compact-filters {
+        padding: 0.6rem 0.7rem;
+        gap: 0.4rem;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    
+    .compact-search-container {
+        flex: 3;
+        min-width: 0;
+    }
+    
+    .compact-search {
+        font-size: 0.5rem;
+        padding: 0.4rem 0.6rem 0.4rem 1.8rem;
+        width: 100%;
+    }
+    
+    .compact-search-icon {
+        font-size: 0.6rem;
+        left: 6px;
+    }
+    
+    .compact-filter-btn {
+        font-size: 0.5rem;
+        padding: 0.4rem 0.5rem;
+        min-height: 38px;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .compact-tabs {
+        padding: 0 0.3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        scrollbar-width: none;
+    }
+    
+    .compact-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .compact-tab {
+        flex: 0 0 calc(33.333% - 0.4rem);
+        font-size: 0.5rem;
+        padding: 0.6rem 0.3rem;
+        min-height: 40px;
+        margin: 0.2rem;
+        text-align: center;
+        border-radius: 4px;
+    }
+    
+    .compact-cards-container {
+        padding: 0.6rem;
+        gap: 0.6rem;
+    }
+    
+    /* Карточки для телефонов - вертикальная компоновка */
+    .compact-card {
+        padding: 0.6rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+        min-height: 140px;
+        align-items: center;
+    }
+    
+    .compact-preview {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .compact-card-info {
+        width: 100%;
+        align-items: center;
+    }
+    
+    .compact-card-header {
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .compact-card-name {
+        font-size: 0.55rem;
+        text-align: center;
+        -webkit-line-clamp: 2;
+        line-height: 1.3;
+    }
+    
+    .compact-card-power {
+        font-size: 0.5rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
+    .compact-badges {
+        justify-content: center;
+        width: 100%;
+        gap: 0.3rem;
+    }
+    
+    .compact-badge {
+        font-size: 0.4rem;
+        padding: 0.2rem 0.3rem;
+        line-height: 1;
+    }
+    
+    .compact-stats {
+        justify-content: center;
+        font-size: 0.45rem;
+        width: 100%;
+        gap: 0.3rem;
+    }
+    
+    .compact-stat {
+        font-size: 0.45rem;
+        gap: 0.1rem;
+    }
+    
+    .compact-empty {
+        padding: 1.5rem 0.8rem;
+        text-align: center;
+    }
+    
+    .compact-empty-icon {
+        font-size: 1.8rem;
+    }
+    
+    .compact-empty-title {
+        font-size: 0.6rem;
+    }
+    
+    .compact-empty-desc {
+        font-size: 0.5rem;
+        line-height: 1.3;
+    }
+    
+    .compact-archive-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.5rem;
+        min-height: 40px;
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Для очень маленьких телефонов (до 360px) */
+@media (max-width: 360px) {
+    .universe-map-page {
+        font-size: 7px;
+    }
+    
+    /* Максимальная оптимизация - минимум анимаций, но яркие звезды */
+    .twinkling {
+        animation: none !important;
+        opacity: 0.6;
+    }
+    
+    .nebula-background {
+        animation: none !important;
+        opacity: 0.3;
+    }
+    
+    .bright-stars {
+        animation: none !important;
+        opacity: 0.4;
+    }
+    
+    /* Замедляем или отключаем анимации орбит */
+    .orbit-1, .orbit-2, .orbit-3, .orbit-4, .orbit-5 {
+        animation-duration: 9999s !important; /* Практически статично */
+    }
+    
+    /* Упрощаем солнце */
+    .current-sun {
+        animation: none !important;
+    }
+    
+    .current-sun::before {
+        animation: none !important;
+    }
+    
+    /* Орбиты еще меньше */
+    .orbit-1 { 
+        width: 180px !important; 
+        height: 180px !important; 
+    }
+    .orbit-2 { 
+        width: 280px !important; 
+        height: 280px !important; 
+    }
+    .orbit-3 { 
+        width: 380px !important; 
+        height: 380px !important; 
+    }
+    .orbit-4 { 
+        width: 480px !important; 
+        height: 480px !important; 
+    }
+    .orbit-5 { 
+        width: 580px !important; 
+        height: 580px !important; 
+    }
+    
+    /* ШАПКА ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ТЕЛЕФОНОВ */
+    .map-header {
+        height: 52px;
+        padding: 0 0.4rem;
+    }
+    
+    .header-left {
+        min-width: 42px;
+    }
+    
+    .header-center {
+        padding: 0 0.1rem;
+    }
+    
+    .header-right {
+        gap: 0.3rem;
+    }
+    
+    /* Кнопка назад */
+    .back-button {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        padding: 0.4rem;
+    }
+    
+    .back-icon {
+        font-size: 0.8rem;
+    }
+    
+    /* Заголовок */
+    .header-title {
+        font-size: 0.55rem;
+        max-width: 130px;
+        padding: 0.4rem 0.4rem;
+        letter-spacing: 0.2px;
+    }
+    
+    /* Валютная панель */
+    .currency-display {
+        padding: 0.3rem 0.4rem;
+        font-size: 0.45rem;
+        min-width: 70px;
+    }
+    
+    .currency-icon {
+        font-size: 0.6rem;
+    }
+    
+    .currency-amount {
+        min-width: 25px;
+        font-size: 0.5rem;
+    }
+    
+    /* Ссылка в архив */
+    .archive-link {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+    
+    .archive-link::before {
+        font-size: 0.9rem;
+    }
+    
+    .central-area {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .current-sun {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .planet-slot {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* МОДАЛЬНОЕ ОКНО ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ТЕЛЕФОНОВ */
+    .compact-modal {
+        padding: 0.2rem;
+    }
+    
+    .compact-modal-content {
+        max-height: 95vh;
+        border-radius: 8px;
+    }
+    
+    .compact-modal-header {
+        padding: 0.5rem 0.6rem;
+        min-height: 48px;
+    }
+    
+    .compact-modal-title {
+        font-size: 0.55rem;
+        line-height: 1.1;
+    }
+    
+    .compact-close-btn {
+        min-height: 32px;
+        min-width: 32px;
+        font-size: 0.9rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    .compact-filters {
+        padding: 0.5rem 0.6rem;
+        gap: 0.3rem;
+        flex-direction: column;
+    }
+    
+    .compact-search-container {
+        width: 100%;
+    }
+    
+    .compact-search {
+        font-size: 0.45rem;
+        padding: 0.3rem 0.5rem 0.3rem 1.6rem;
+    }
+    
+    .compact-search-icon {
+        font-size: 0.5rem;
+    }
+    
+    .compact-filter-btn {
+        font-size: 0.45rem;
+        padding: 0.3rem 0.4rem;
+        min-height: 36px;
+        width: 100%;
+    }
+    
+    .compact-tabs {
+        padding: 0 0.2rem;
+    }
+    
+    .compact-tab {
+        flex: 0 0 calc(50% - 0.4rem);
+        font-size: 0.45rem;
+        padding: 0.5rem 0.2rem;
+        min-height: 38px;
+        margin: 0.1rem;
+    }
+    
+    .compact-cards-container {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    .compact-card {
+        padding: 0.5rem;
+        min-height: 130px;
+        gap: 0.4rem;
+    }
+    
+    .compact-preview {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .compact-card-name {
+        font-size: 0.5rem;
+        -webkit-line-clamp: 2;
+    }
+    
+    .compact-card-power {
+        font-size: 0.45rem;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .compact-badge {
+        font-size: 0.35rem;
+        padding: 0.15rem 0.25rem;
+    }
+    
+    .compact-stat {
+        font-size: 0.4rem;
+    }
+    
+    .compact-empty {
+        padding: 1rem 0.5rem;
+    }
+    
+    .compact-empty-icon {
+        font-size: 1.5rem;
+    }
+    
+    .compact-empty-title {
+        font-size: 0.55rem;
+    }
+    
+    .compact-empty-desc {
+        font-size: 0.45rem;
+    }
+    
+    .compact-archive-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.45rem;
+        min-height: 36px;
+    }
+}
+
+/* Для очень широких экранов (больше 1200px) */
+@media (min-width: 1200px) {
+    .compact-modal-content {
+        max-width: 700px;
+    }
+    
+    .compact-tab {
+        min-width: 100px;
+        font-size: 0.65rem;
+        padding: 0.8rem 0.6rem;
+    }
+    
+    .compact-card {
+        min-height: 90px;
+        padding: 0.9rem;
+    }
+    
+    .compact-card-name {
+        font-size: 0.7rem;
+        -webkit-line-clamp: 1;
+    }
+    
+    .compact-card-power {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .compact-badge {
+        font-size: 0.55rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .compact-preview {
+        width: 55px;
+        height: 55px;
+    }
+    
+    /* Делаем скроллбар тоньше на широких экранах */
+    .compact-tabs::-webkit-scrollbar {
+        height: 4px;
+    }
+}
+
+/* Пейзажная ориентация */
+@media (max-width: 768px) and (orientation: landscape) {
+    .stars {
+        background: 
+            radial-gradient(circle at 50% 30%, rgba(20, 30, 60, 0.2) 0%, transparent 50%),
+            linear-gradient(180deg, #050a19 0%, #0a0a16 100%);
+    }
+    
+    .twinkling {
+        background-size: 150px 150px, 200px 200px;
+        animation: twinkle-mobile 40s linear infinite;
+        opacity: 0.9;
+    }
+    
+    .nebula-background {
+        opacity: 0.4;
+        animation: nebula-move-slow 100s linear infinite;
+    }
+    
+    .universe-map-main {
+        padding-top: 46px;
+        height: calc(100vh - 46px);
+    }
+    
+    .map-header {
+        height: 46px;
+        padding: 0 0.5rem;
+    }
+    
+    /* В пейзажной ориентации показываем больше элементов */
+    .back-button {
+        font-size: 0.5rem;
+        padding: 0.3rem 0.5rem;
+        width: auto;
+        height: auto;
+        border-radius: 6px;
+    }
+    
+    .back-text {
+        display: inline;
+        font-size: 0.45rem;
+    }
+    
+    .header-title {
+        font-size: 0.55rem;
+        max-width: 200px;
+    }
+    
+    .currency-per-minute {
+        display: block;
+        font-size: 0.4rem;
+    }
+    
+    .mini-controls {
+        display: flex;
+    }
+    
+    .archive-link {
+        width: auto;
+        height: auto;
+        border-radius: 6px !important;
+        font-size: 0.5rem !important;
+        padding: 0.3rem 0.5rem !important;
+    }
+    
+    .archive-link::before {
+        display: none;
+    }
+    
+    .archive-link span {
+        display: inline;
+    }
+    
+    .bonus-panel {
+        flex-direction: row;
+        max-height: 80px;
+        bottom: 0.4rem;
+        left: 0.4rem;
+        right: 0.4rem;
+        padding: 0.6rem;
+        gap: 1rem;
+    }
+    
+    .bonus-section, .stats-section {
+        width: 48%;
+    }
+    
+    .controls-hint {
+        display: none;
+    }
+    
+    /* МОДАЛЬНОЕ ОКНО В ПЕЙЗАЖНОЙ ОРИЕНТАЦИИ */
+    .compact-modal-content {
+        max-height: 85vh;
+        width: 90%;
+        max-width: 600px;
+    }
+    
+    .compact-filters {
+        flex-direction: row;
+    }
+    
+    .compact-tabs {
+        flex-wrap: nowrap;
+    }
+    
+    .compact-tab {
+        flex: 0 0 auto;
+        min-width: 80px;
+    }
+    
+    .compact-cards-container {
+        max-height: 50vh;
+    }
+    
+    .compact-card {
+        flex-direction: row;
+        text-align: left;
+        min-height: 90px;
+        align-items: center;
+    }
+    
+    .compact-card-info {
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .compact-card-header {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    
+    .compact-card-name {
+        text-align: left;
+        -webkit-line-clamp: 1;
+    }
+    
+    .compact-badges {
+        justify-content: flex-start;
+    }
+    
+    .compact-stats {
+        justify-content: flex-start;
+    }
+    
+    .compact-empty {
+        padding: 1rem;
+    }
+}
+
+/* Оптимизация для Retina/высокоплотных экранов */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .orbit-line,
+    .planet-slot,
+    .compact-modal-content,
+    .bonus-panel,
+    .controls-hint {
+        border-width: 0.5px;
+    }
+    
+    .map-header {
+        border-bottom-width: 0.5px;
+    }
+    
+    /* Для Retina-экранов делаем звезды еще ярче */
+    .twinkling {
+        opacity: 1;
+    }
+    
+    .bright-stars {
+        opacity: 0.9;
+    }
+}
+
+/* Фикс для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .universe-map-page {
+        height: -webkit-fill-available;
+    }
+    
+    .universe-map-main {
+        height: -webkit-fill-available;
+        padding-top: 50px;
+        height: calc(100vh - 50px);
+    }
+    
+    @media (max-width: 768px) {
+        .universe-map-main {
+            padding-top: 52px;
+            height: calc(100vh - 52px);
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .universe-map-main {
+            padding-top: 56px;
+            height: calc(100vh - 56px);
+        }
+    }
+    
+    /* Фикс для input zoom на iOS */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+    
+    .compact-search {
+        font-size: 16px !important;
+    }
+    
+    /* Улучшение тач-таргетов для iOS */
+    .back-button,
+    .archive-link,
+    .mini-btn,
+    .currency-display {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Фикс для адресной строки Android Chrome */
+@media (max-height: 600px) and (orientation: portrait) {
+    .universe-map-main {
+        height: calc(100vh - 60px);
+    }
+    
+    @media (max-width: 768px) {
+        .universe-map-main {
+            height: calc(100vh - 52px);
+        }
+    }
+}
+
+/* Улучшение читаемости на светлом фоне */
+@media (prefers-color-scheme: light) {
+    .universe-map-page {
+        background: #f0f0f0;
+        color: #333;
+    }
+    
+    .map-header {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.98) 100%);
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .header-title {
+        color: #1a5fa0;
+        text-shadow: none;
+        background: rgba(26, 95, 160, 0.05);
+        border: 1px solid rgba(26, 95, 160, 0.2);
+    }
+    
+    .back-button {
+        color: #333;
+        background: rgba(138, 180, 248, 0.1);
+        border: 1px solid rgba(138, 180, 248, 0.3);
+    }
+    
+    .back-icon {
+        color: #1a5fa0;
+    }
+    
+    .currency-display {
+        background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+        border: 1px solid rgba(138, 43, 226, 0.2);
+        color: #333;
+    }
+    
+    .currency-icon {
+        color: #ffd700;
+    }
+    
+    .mini-btn {
+        background: rgba(138, 180, 248, 0.1);
+        border: 1px solid rgba(138, 180, 248, 0.3);
+        color: #333;
+    }
+    
+    .archive-link {
+        background: rgba(255, 110, 199, 0.1) !important;
+        border: 1px solid rgba(255, 110, 199, 0.3) !important;
+        color: #ff6ec7 !important;
+    }
+    
+    .bonus-panel,
+    .controls-hint,
+    .compact-modal-content {
+        background: rgba(255, 255, 255, 0.95);
+        border-color: #ddd;
+        color: #333;
+    }
+    
+    .compact-card {
+        background: rgba(240, 240, 240, 0.9);
+    }
+}
+
+/* Специальные стили для очень высоких экранов */
+@media (min-height: 800px) and (max-width: 768px) {
+    .bonus-panel {
+        max-height: 180px;
+    }
+    
+    .compact-modal-content {
+        max-height: 75vh;
+    }
+    
+    .compact-cards-container {
+        max-height: 60vh;
+    }
+}
+
+/* Улучшение производительности анимаций */
+.orbit-ring, .planet-visual, .current-sun, .twinkling, .nebula-background, .bright-stars {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Оптимизация тач-интерфейса */
+@media (hover: none) and (pointer: coarse) {
+    /* Увеличиваем тач-таргеты */
+    .back-button,
+    .archive-link,
+    .mini-btn,
+    .compact-card,
+    .compact-tab,
+    .compact-filter-btn,
+    .compact-close-btn,
+    .compact-archive-btn,
+    .planet-slot,
+    .currency-display {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Улучшаем визуальную обратную связь для тач-устройств */
+    .back-button:active,
+    .archive-link:active,
+    .mini-btn:active,
+    .currency-display:active {
+        transform: translateY(1px) scale(0.98);
+    }
+    
+    /* Убираем hover-эффекты для тач-устройств */
+    .compact-card::before,
+    .currency-display::before {
+        display: none;
+    }
+    
+    /* Улучшаем скролл */
+    .compact-cards-container,
+    .compact-tabs,
+    .bonus-panel {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Более плавные transition */
+    .compact-card,
+    .planet-slot,
+    .back-button,
+    .archive-link,
+    .mini-btn {
+        transition: all 0.15s ease;
+    }
+    
+    /* Убираем мелкие детали, которые мешают на тач-устройствах */
+    .compact-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .planet-slot:hover {
+        transform: none;
+    }
+    
+    /* Добавляем активные состояния для тач-устройств */
+    .back-button:active,
+    .archive-link:active {
+        opacity: 0.8;
+    }
+}
+
+/* Улучшенный фокус для доступности */
+.compact-card:focus-visible,
+.compact-tab:focus-visible,
+.compact-filter-btn:focus-visible,
+.compact-close-btn:focus-visible,
+.back-button:focus-visible,
+.mini-btn:focus-visible,
+.currency-display:focus-visible,
+.archive-link:focus-visible {
+    outline: 3px solid #4dabf7;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.3);
+}
+
+/* Поддержка очень старых браузеров */
+@supports not (backdrop-filter: blur(10px)) {
+    .map-header {
+        background: rgba(10, 15, 35, 0.98);
+    }
+    
+    .bonus-panel,
+    .controls-hint,
+    .compact-modal-content,
+    #loading-message,
+    .universe-message {
+        background: rgba(10, 15, 35, 0.98);
+    }
+}
+
+/* Фикс для переполнения текста */
+.compact-card-name,
+.header-title,
+.placeholder-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Улучшение отзывчивости интерактивных элементов */
+button, 
+a, 
+[role="button"], 
+input, 
+select, 
+textarea {
+    touch-action: manipulation;
+}
+
+/* Плавное появление шапки при загрузке */
+.map-header {
+    animation: headerSlideIn 0.5s ease-out;
+}
+
+@keyframes headerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Фикс для фона на старых Android устройствах */
+@media screen and (max-width: 480px) and (-webkit-max-device-pixel-ratio: 1.5) {
+    .stars {
+        background: #050a19 !important;
+    }
+    
+    .twinkling, .nebula-background, .bright-stars {
+        display: none !important;
+    }
+}
+
+/* Оптимизация для темной темы */
+@media (prefers-color-scheme: dark) {
+    .stars {
+        background: #050a19;
+    }
+    
+    .twinkling {
+        opacity: 1;
+    }
+    
+    .bright-stars {
+        opacity: 0.9;
+    }
+}
+
+/* Динамическая оптимизация на основе производительности */
+.performance-low .twinkling,
+.performance-low .nebula-background,
+.performance-low .orbit-ring,
+.performance-low .bright-stars {
+    animation: none !important;
+}
+
+.performance-low .planet-visual {
+    animation: none !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.performance-low .current-sun {
+    animation: none !important;
+}
+
+.performance-low .current-sun::before {
+    animation: none !important;
+}
+
+.performance-low .planet-visual,
+.performance-low .current-sun {
+    box-shadow: none !important;
+}
+
+.performance-low .bonus-panel,
+.performance-low .controls-hint {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Эффект мерцания для ярких звезд */
+@keyframes star-twinkle {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.bright-stars {
+    animation: star-twinkle 3s infinite alternate;
+}
