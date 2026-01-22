@@ -1,4 +1,4 @@
-// universe-map.js - Обновленная версия с оптимизированным фоном и мобильной поддержкой
+// universe-map.js - Обновленная версия с оптимизированным статичным фоном для мобильных устройств
 
 // Отладочное логирование
 const DEBUG = true;
@@ -293,6 +293,9 @@ class UniverseMap {
         
         debugLog(`📱 Мобильное устройство: ${this.isMobile}, Touch: ${this.isTouchDevice}, Производительность: ${this.performanceLevel}`);
         debugLog('🚀 UniverseMap создан');
+        
+        // Автоматическая оптимизация для мобильных устройств
+        this.optimizeForMobile();
     }
     
     getOrbitRadii() {
@@ -322,25 +325,89 @@ class UniverseMap {
             
             // Проверяем частоту кадров
             let fps = 60;
-            if (typeof navigator.getBattery === 'function') {
-                // Если на батарее - снижаем качество
-                navigator.getBattery().then(battery => {
-                    if (battery.level < 0.3) {
-                        fps = 30;
-                    }
-                });
-            }
             
             // Определяем уровень производительности
-            if (memory < 2 || cores < 2) {
+            if (memory < 2 || cores < 2 || window.innerWidth <= 360) {
                 return 'low';
-            } else if (memory < 4 || cores < 4) {
+            } else if (memory < 4 || cores < 4 || window.innerWidth <= 480) {
                 return 'medium';
             } else {
                 return 'high';
             }
         }
         return 'high';
+    }
+    
+    optimizeForMobile() {
+        if (!this.isMobile) return;
+        
+        debugLog('📱 Оптимизация для мобильных устройств...');
+        
+        // Добавляем класс производительности
+        document.body.classList.add(`performance-${this.performanceLevel}`);
+        
+        // Отключаем анимации фона на мобильных устройствах
+        this.disableBackgroundAnimations();
+        
+        // Оптимизация для низкопроизводительных устройств
+        if (this.performanceLevel === 'low') {
+            this.optimizeForLowPerformance();
+        }
+        
+        debugLog(`⚡ Уровень оптимизации: ${this.performanceLevel}`);
+    }
+    
+    disableBackgroundAnimations() {
+        debugLog('🌀 Отключение анимаций фона для мобильных устройств');
+        
+        const backgroundElements = [
+            '.twinkling',
+            '.nebula-background', 
+            '.bright-stars'
+        ];
+        
+        backgroundElements.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                element.style.animation = 'none';
+                element.style.animationPlayState = 'paused';
+            }
+        });
+        
+        // Замедляем анимации орбит
+        const orbits = document.querySelectorAll('.orbit-ring');
+        orbits.forEach(orbit => {
+            orbit.style.animationDuration = '300s';
+        });
+    }
+    
+    optimizeForLowPerformance() {
+        debugLog('⚡ Дополнительная оптимизация для слабых устройств');
+        
+        // Убираем сложные фоны
+        document.querySelectorAll('.twinkling, .nebula-background').forEach(el => {
+            el.style.opacity = '0.2';
+        });
+        
+        // Упрощаем звезды
+        const stars = document.querySelector('.stars');
+        if (stars) {
+            stars.style.background = '#050a19';
+        }
+        
+        // Отключаем свечение солнца
+        const sun = document.querySelector('.current-sun');
+        if (sun) {
+            const glow = sun.querySelector('::before');
+            if (glow) {
+                glow.style.display = 'none';
+            }
+        }
+        
+        // Отключаем анимации планет
+        document.querySelectorAll('.planet-visual').forEach(planet => {
+            planet.style.animation = 'none';
+        });
     }
     
     async init() {
@@ -398,9 +465,6 @@ class UniverseMap {
             this.showMessage('🌟 ВСЕЛЕННАЯ ГОТОВА!');
             
             this.checkInventoryForNewCards();
-            
-            // Адаптация для мобильных
-            this.adaptForMobile();
             
             clearTimeout(initTimeout);
             
@@ -512,95 +576,13 @@ class UniverseMap {
         }
     }
     
-    adaptForMobile() {
-        if (!this.isMobile) return;
-        
-        debugLog('📱 Адаптация для мобильных устройств...');
-        
-        // Добавляем класс производительности
-        document.body.classList.add(`performance-${this.performanceLevel}`);
-        
-        this.adjustAnimationsForMobile();
-        this.optimizeForMobile();
-        this.hideMobileUnnecessaryElements();
-        
-        // Дополнительная оптимизация для слабых устройств
-        if (this.performanceLevel === 'low') {
-            this.optimizeForLowPerformance();
-        }
-    }
-    
-    optimizeForLowPerformance() {
-        debugLog('⚡ Дополнительная оптимизация для слабых устройств');
-        
-        // Убираем сложные фоны
-        document.querySelectorAll('.twinkling, .nebula-background').forEach(el => {
-            el.style.opacity = '0.1';
-        });
-        
-        // Упрощаем анимации
-        const orbits = document.querySelectorAll('.orbit-ring');
-        orbits.forEach(orbit => {
-            orbit.style.animationDuration = '999s';
-        });
-    }
-    
-    adjustAnimationsForMobile() {
-        const style = document.createElement('style');
-        style.textContent = `
-            @media (max-width: 768px) {
-                .orbit-1 { animation-duration: 120s !important; }
-                .orbit-2 { animation-duration: 180s !important; }
-                .orbit-3 { animation-duration: 240s !important; }
-                .orbit-4 { animation-duration: 300s !important; }
-                .orbit-5 { animation-duration: 360s !important; }
-                
-                .stars, .twinkling, .nebula-background {
-                    animation-duration: 2s !important;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        debugLog('🌀 Анимации адаптированы для мобильных');
-    }
-    
-    optimizeForMobile() {
-        if (this.incomeInterval) {
-            clearInterval(this.incomeInterval);
-        }
-        
-        const interval = this.isMobile ? 2000 : 1000;
-        this.incomeInterval = setInterval(() => {
-            this.calculateIncome();
-            this.processIncome();
-            this.updateIncomeDisplay();
-        }, interval);
-        
-        debugLog(`💰 Система дохода оптимизирована (интервал: ${interval}мс)`);
-    }
-    
-    hideMobileUnnecessaryElements() {
-        const controlsHint = document.querySelector('.controls-hint');
-        if (controlsHint && this.isMobile) {
-            controlsHint.style.display = 'none';
-        }
-        
-        if (window.innerWidth <= 480) {
-            const miniControls = document.querySelector('.mini-controls');
-            if (miniControls) {
-                miniControls.style.display = 'none';
-            }
-        }
-        
-        debugLog('👁️ Необязательные элементы скрыты для мобильных');
-    }
-    
     startIncomeSystem() {
         if (this.incomeInterval) {
             clearInterval(this.incomeInterval);
         }
         
-        const interval = this.isMobile ? 2000 : 1000;
+        // Для мобильных устройств используем более редкие обновления
+        const interval = this.isMobile ? 3000 : 1000;
         debugLog(`💰 Запуск системы дохода с интервалом ${interval}мс`);
         
         this.incomeInterval = setInterval(() => {
@@ -878,7 +860,7 @@ class UniverseMap {
         debugLog('🌀 Запуск анимации орбит...');
         const orbits = [1, 2, 3, 4, 5];
         const orbitSpeeds = this.isMobile ? 
-            { 1: 0.05, 2: 0.04, 3: 0.03, 4: 0.02, 5: 0.01 } : 
+            { 1: 0.02, 2: 0.015, 3: 0.01, 4: 0.005, 5: 0.002 } : 
             { 1: 0.2, 2: 0.15, 3: 0.1, 4: 0.05, 5: 0.02 };
         const orbitDirections = { 1: 1, 2: -1, 3: 1, 4: -1, 5: 1 };
         const orbitRadii = this.getOrbitRadii();
@@ -1042,7 +1024,7 @@ class UniverseMap {
                 navigator.getBattery().then(battery => {
                     battery.addEventListener('levelchange', () => {
                         if (battery.level < 0.2) {
-                            this.optimizeForBatterySaver();
+                            this.enableBatterySaverMode();
                         }
                     });
                 });
@@ -1056,8 +1038,8 @@ class UniverseMap {
         }
     }
     
-    optimizeForBatterySaver() {
-        debugLog('🔋 Оптимизация для режима энергосбережения');
+    enableBatterySaverMode() {
+        debugLog('🔋 Включен режим энергосбережения');
         
         // Уменьшаем частоту обновления
         if (this.incomeInterval) {
@@ -1071,18 +1053,20 @@ class UniverseMap {
         
         // Упрощаем анимации
         this.stopOrbitAnimation();
-        setTimeout(() => {
-            this.startOrbitAnimation();
-            // Медленнее анимации
-            const orbits = document.querySelectorAll('.orbit-ring');
-            orbits.forEach(orbit => {
-                orbit.style.animationDuration = '300s';
-            });
-        }, 100);
         
         // Уменьшаем качество фона
         document.querySelectorAll('.twinkling, .nebula-background').forEach(el => {
-            el.style.opacity = '0.2';
+            el.style.opacity = '0.1';
+        });
+        
+        // Отключаем сложные эффекты
+        const sun = document.querySelector('.current-sun');
+        if (sun) {
+            sun.style.animation = 'none';
+        }
+        
+        document.querySelectorAll('.planet-visual').forEach(planet => {
+            planet.style.animation = 'none';
         });
     }
     

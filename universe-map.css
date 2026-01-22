@@ -36,7 +36,7 @@
     -webkit-text-size-adjust: 100%;
 }
 
-/* ==================== ЯРКИЙ КОСМИЧЕСКИЙ ФОН ==================== */
+/* ==================== ОПТИМИЗИРОВАННЫЙ КОСМИЧЕСКИЙ ФОН ==================== */
 
 /* Базовый фон с яркими звездами */
 .stars, .twinkling, .nebula-background, .bright-stars {
@@ -49,7 +49,7 @@
     z-index: -2;
 }
 
-/* Базовый звездный фон с яркими звездами */
+/* Базовый звездный фон - статичный для всех устройств */
 .stars {
     background: 
         radial-gradient(ellipse at 50% 50%, rgba(20, 30, 60, 0.15) 0%, transparent 60%),
@@ -58,60 +58,66 @@
         linear-gradient(45deg, #050a19 0%, #0a0a16 50%, #050a19 100%);
 }
 
-/* Яркие анимированные звезды для десктопа */
+/* Яркие статичные звезды для всех устройств */
 .twinkling {
     background-image: 
-        /* Мелкие яркие звезды */
-        radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 30% 40%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
-        radial-gradient(2px 2px at 50% 60%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 70% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
-        radial-gradient(2px 2px at 90% 80%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        /* Крупные яркие звезды */
+        radial-gradient(4px 4px at 10% 20%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        radial-gradient(3px 3px at 30% 40%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+        radial-gradient(4px 4px at 50% 60%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        radial-gradient(3px 3px at 70% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+        radial-gradient(4px 4px at 90% 80%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
         /* Дополнительные яркие звезды */
-        radial-gradient(3px 3px at 15% 35%, rgba(255, 255, 255, 1) 0%, transparent 100%),
-        radial-gradient(2.5px 2.5px at 40% 65%, rgba(255, 255, 255, 0.95) 0%, transparent 100%),
-        radial-gradient(3px 3px at 65% 25%, rgba(255, 255, 255, 1) 0%, transparent 100%),
-        radial-gradient(2.5px 2.5px at 85% 55%, rgba(255, 255, 255, 0.95) 0%, transparent 100%),
-        radial-gradient(3px 3px at 25% 85%, rgba(255, 255, 255, 1) 0%, transparent 100%);
+        radial-gradient(5px 5px at 15% 35%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(4px 4px at 40% 65%, rgba(255, 255, 255, 0.95) 0%, transparent 100%),
+        radial-gradient(5px 5px at 65% 25%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(4px 4px at 85% 55%, rgba(255, 255, 255, 0.95) 0%, transparent 100%),
+        radial-gradient(5px 5px at 25% 85%, rgba(255, 255, 255, 1) 0%, transparent 100%);
     background-size: 300px 300px, 400px 400px, 500px 500px, 600px 600px, 700px 700px,
                      350px 350px, 450px 450px, 550px 550px, 650px 650px, 750px 750px;
-    animation: twinkle-mobile 50s linear infinite;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
-/* Яркие статичные звезды */
+/* Особо яркие звезды - статичные */
 .bright-stars {
     background-image: 
-        radial-gradient(4px 4px at 20% 30%, rgba(255, 255, 255, 1) 0%, transparent 100%),
-        radial-gradient(5px 5px at 45% 70%, rgba(255, 255, 255, 1) 0%, transparent 100%),
-        radial-gradient(3px 3px at 75% 40%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
-        radial-gradient(6px 6px at 60% 20%, rgba(255, 215, 0, 0.8) 0%, transparent 100%),
-        radial-gradient(4px 4px at 35% 80%, rgba(135, 245, 255, 0.7) 0%, transparent 100%),
-        radial-gradient(5px 5px at 80% 60%, rgba(255, 110, 199, 0.6) 0%, transparent 100%);
+        radial-gradient(6px 6px at 20% 30%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(7px 7px at 45% 70%, rgba(255, 255, 255, 1) 0%, transparent 100%),
+        radial-gradient(5px 5px at 75% 40%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+        radial-gradient(8px 8px at 60% 20%, rgba(255, 215, 0, 0.9) 0%, transparent 100%),
+        radial-gradient(6px 6px at 35% 80%, rgba(135, 245, 255, 0.8) 0%, transparent 100%),
+        radial-gradient(7px 7px at 80% 60%, rgba(255, 110, 199, 0.7) 0%, transparent 100%);
     background-size: 800px 800px, 900px 900px, 1000px 1000px, 1100px 1100px, 1200px 1200px, 1300px 1300px;
-    animation: very-slow-drift 200s linear infinite;
     opacity: 0.7;
 }
 
-/* Туманности для десктопа */
+/* Туманности - статичные для всех устройств */
 .nebula-background {
     background: 
         radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(255, 110, 199, 0.12) 0%, transparent 40%),
         radial-gradient(circle at 40% 70%, rgba(135, 245, 255, 0.1) 0%, transparent 45%),
         radial-gradient(circle at 60% 90%, rgba(255, 215, 0, 0.08) 0%, transparent 55%);
-    animation: nebula-move-slow 120s linear infinite;
-    opacity: 0.6;
+    opacity: 0.5;
     mix-blend-mode: screen;
 }
 
-/* Медленные анимации для лучшей производительности */
-@keyframes twinkle {
-    0% { opacity: 0.7; transform: translateY(0) scale(1); }
-    50% { opacity: 1; transform: translateY(-5px) scale(1.1); }
-    100% { opacity: 0.7; transform: translateY(0) scale(1); }
+/* Анимации ТОЛЬКО для десктопов */
+@media (min-width: 769px) {
+    .twinkling {
+        animation: twinkle-mobile 80s linear infinite;
+    }
+    
+    .bright-stars {
+        animation: very-slow-drift 300s linear infinite;
+    }
+    
+    .nebula-background {
+        animation: nebula-move-slow 150s linear infinite;
+    }
 }
 
+/* Медленные анимации для десктопов */
 @keyframes twinkle-mobile {
     0% { transform: translateX(0) translateY(0); opacity: 0.8; }
     25% { transform: translateX(-50px) translateY(20px); opacity: 0.9; }
@@ -502,7 +508,6 @@
     height: 220px;
     background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent 70%);
     border-radius: 50%;
-    animation: rotate 30s linear infinite;
 }
 
 /* Орбитальные кольца с вращением */
@@ -1537,29 +1542,27 @@
         font-size: 9px;
     }
     
-    /* Упрощаем фон для планшетов, но оставляем яркие звезды */
+    /* Оптимизированный статичный фон для планшетов */
     .stars {
         background: 
-            radial-gradient(circle at 50% 50%, rgba(20, 30, 60, 0.15) 0%, transparent 60%),
             linear-gradient(45deg, #050a19 0%, #0a0a16 100%);
     }
     
-    /* Меньше звезд, но яркие */
+    /* Статичные звезды без анимации */
     .twinkling {
         background-image: 
-            radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
-            radial-gradient(1.5px 1.5px at 60% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
-            radial-gradient(2px 2px at 80% 70%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
-            radial-gradient(3px 3px at 40% 65%, rgba(255, 255, 255, 1) 0%, transparent 100%),
-            radial-gradient(3px 3px at 65% 25%, rgba(255, 255, 255, 1) 0%, transparent 100%);
-        background-size: 200px 200px, 300px 300px, 400px 400px, 500px 500px, 600px 600px;
-        animation: twinkle-mobile 80s linear infinite;
-        opacity: 0.8;
+            radial-gradient(3px 3px at 20% 30%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+            radial-gradient(4px 4px at 60% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+            radial-gradient(3px 3px at 80% 70%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+            radial-gradient(5px 5px at 40% 65%, rgba(255, 255, 255, 1) 0%, transparent 100%);
+        background-size: 300px 300px, 400px 400px, 500px 500px, 600px 600px;
+        opacity: 0.7;
+        animation: none !important;
     }
     
     .bright-stars {
         opacity: 0.6;
-        animation: very-slow-drift 300s linear infinite;
+        animation: none !important;
     }
     
     /* Упрощенные туманности */
@@ -1567,11 +1570,11 @@
         background: 
             radial-gradient(circle at 30% 40%, rgba(138, 43, 226, 0.1) 0%, transparent 60%),
             radial-gradient(circle at 70% 60%, rgba(135, 245, 255, 0.08) 0%, transparent 50%);
-        animation: nebula-move-slow 150s linear infinite;
-        opacity: 0.5;
+        opacity: 0.3;
+        animation: none !important;
     }
     
-    /* Уменьшаем скорость анимаций */
+    /* Замедляем анимации орбит */
     .orbit-1 { animation-duration: 120s !important; }
     .orbit-2 { animation-duration: 180s !important; }
     .orbit-3 { animation-duration: 240s !important; }
@@ -1936,52 +1939,49 @@
     }
 }
 
-/* Телефоны (до 480px) */
+/* Телефоны (до 480px) - ОПТИМИЗИРОВАННЫЙ СТАТИЧНЫЙ ФОН */
 @media (max-width: 480px) {
     .universe-map-page {
         font-size: 8px;
     }
     
-    /* Минималистичный фон для телефонов, но с яркими звездами */
+    /* Минималистичный статичный фон для телефонов */
     .stars {
         background: #050a19;
-        background-image: 
-            linear-gradient(180deg, rgba(10, 15, 35, 0.15) 0%, transparent 50%),
-            linear-gradient(45deg, #050a19 0%, #0a0a16 100%);
     }
     
-    /* Только самые яркие звезды на телефонах */
+    /* Статичные звезды без анимаций */
     .twinkling {
         background-image: 
-            radial-gradient(2px 2px at 20% 40%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
-            radial-gradient(1.5px 1.5px at 50% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
-            radial-gradient(2px 2px at 80% 60%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
-            radial-gradient(3px 3px at 40% 65%, rgba(255, 255, 255, 1) 0%, transparent 100%);
-        background-size: 150px 150px, 200px 200px, 250px 250px, 300px 300px;
-        animation: twinkle-mobile 100s linear infinite;
-        opacity: 0.7;
+            radial-gradient(2px 2px at 20% 40%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+            radial-gradient(3px 3px at 50% 30%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+            radial-gradient(2px 2px at 80% 60%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+            radial-gradient(4px 4px at 40% 65%, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+        background-size: 200px 200px, 250px 250px, 300px 300px, 350px 350px;
+        opacity: 0.6;
+        animation: none !important;
     }
     
     .bright-stars {
         opacity: 0.5;
-        animation: very-slow-drift 400s linear infinite;
+        animation: none !important;
     }
     
-    /* Только одна туманность */
+    /* Простая туманность */
     .nebula-background {
-        background: radial-gradient(circle at 50% 50%, rgba(135, 245, 255, 0.08) 0%, transparent 70%);
-        animation: nebula-move-slow 200s linear infinite;
-        opacity: 0.4;
+        background: radial-gradient(circle at 50% 50%, rgba(135, 245, 255, 0.05) 0%, transparent 70%);
+        opacity: 0.2;
+        animation: none !important;
     }
     
-    /* Еще медленнее анимации орбит */
-    .orbit-1 { animation-duration: 150s !important; }
-    .orbit-2 { animation-duration: 220s !important; }
-    .orbit-3 { animation-duration: 290s !important; }
-    .orbit-4 { animation-duration: 360s !important; }
-    .orbit-5 { animation-duration: 430s !important; }
+    /* Замедляем или отключаем анимации орбит */
+    .orbit-1 { animation-duration: 300s !important; }
+    .orbit-2 { animation-duration: 400s !important; }
+    .orbit-3 { animation-duration: 500s !important; }
+    .orbit-4 { animation-duration: 600s !important; }
+    .orbit-5 { animation-duration: 700s !important; }
     
-    /* Отключаем анимации для планет при слабой производительности */
+    /* Отключаем анимации планет для производительности */
     .planet-visual {
         animation: none !important;
         transform: translate(-50%, -50%) scale(1) !important;
@@ -1989,6 +1989,11 @@
     
     .current-sun {
         animation: pulse-sun-mobile 4s ease-in-out infinite alternate !important;
+    }
+    
+    /* Отключаем свечение солнца */
+    .current-sun::before {
+        display: none;
     }
     
     /* ШАПКА ДЛЯ ТЕЛЕФОНОВ */
@@ -2401,20 +2406,22 @@
         font-size: 7px;
     }
     
-    /* Максимальная оптимизация - минимум анимаций, но яркие звезды */
+    /* Максимальная оптимизация - минимум фона */
     .twinkling {
-        animation: none !important;
-        opacity: 0.6;
+        opacity: 0.4;
+        background-image: 
+            radial-gradient(2px 2px at 30% 40%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+            radial-gradient(3px 3px at 60% 60%, rgba(255, 255, 255, 0.6) 0%, transparent 100%),
+            radial-gradient(4px 4px at 20% 70%, rgba(255, 215, 0, 0.5) 0%, transparent 100%);
+        background-size: 150px 150px, 200px 200px, 250px 250px;
     }
     
     .nebula-background {
-        animation: none !important;
-        opacity: 0.3;
+        opacity: 0.1;
     }
     
     .bright-stars {
-        animation: none !important;
-        opacity: 0.4;
+        opacity: 0.3;
     }
     
     /* Замедляем или отключаем анимации орбит */
@@ -2424,10 +2431,6 @@
     
     /* Упрощаем солнце */
     .current-sun {
-        animation: none !important;
-    }
-    
-    .current-sun::before {
         animation: none !important;
     }
     
@@ -2701,21 +2704,20 @@
 
 /* Пейзажная ориентация */
 @media (max-width: 768px) and (orientation: landscape) {
-    .stars {
-        background: 
-            radial-gradient(circle at 50% 30%, rgba(20, 30, 60, 0.2) 0%, transparent 50%),
-            linear-gradient(180deg, #050a19 0%, #0a0a16 100%);
-    }
-    
+    /* Статичный фон для пейзажной ориентации */
     .twinkling {
-        background-size: 150px 150px, 200px 200px;
-        animation: twinkle-mobile 40s linear infinite;
-        opacity: 0.9;
+        animation: none !important;
+        opacity: 0.5;
     }
     
     .nebula-background {
+        animation: none !important;
+        opacity: 0.2;
+    }
+    
+    .bright-stars {
+        animation: none !important;
         opacity: 0.4;
-        animation: nebula-move-slow 100s linear infinite;
     }
     
     .universe-map-main {
@@ -2862,15 +2864,6 @@
     
     .map-header {
         border-bottom-width: 0.5px;
-    }
-    
-    /* Для Retina-экранов делаем звезды еще ярче */
-    .twinkling {
-        opacity: 1;
-    }
-    
-    .bright-stars {
-        opacity: 0.9;
     }
 }
 
@@ -3205,14 +3198,4 @@ textarea {
 .performance-low .controls-hint {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-}
-
-/* Эффект мерцания для ярких звезд */
-@keyframes star-twinkle {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-}
-
-.bright-stars {
-    animation: star-twinkle 3s infinite alternate;
 }
