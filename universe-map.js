@@ -1,4 +1,4 @@
-// universe-map.js - Обновленная версия с оптимизированным статичным фоном для мобильных устройств
+// universe-map.js - Обновленная версия с фиксированным скроллом для мобильных устройств
 
 // Отладочное логирование
 const DEBUG = true;
@@ -1448,19 +1448,64 @@ class UniverseMap {
         
         compactModal.classList.add('active');
         
+        // ИСПРАВЛЕНИЕ: Фиксируем body для iOS
         if (this.isMobile) {
             document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
         }
         
-        // ИСПРАВЛЕНИЕ ПРОКРУТКИ - ДОБАВЛЯЕМ КЛАСС ДЛЯ ПРОКРУТКИ
+        // ИСПРАВЛЕНИЕ ПРОКРУТКИ
         setTimeout(() => {
             this.checkTabsScrollHint();
             
-            // Добавляем класс для исправления прокрутки на мобильных
-            if (cardsContainer && this.isMobile) {
-                cardsContainer.classList.add('modal-touch-fix');
+            // Инициализируем touch-скролл для мобильных
+            if (this.isMobile) {
+                this.setupMobileScroll(cardsContainer);
             }
         }, 100);
+    }
+    
+    setupMobileScroll(container) {
+        if (!container || !this.isMobile) return;
+        
+        debugLog('📱 Настройка touch-скролла для мобильных');
+        
+        let startY = 0;
+        let isScrolling = false;
+        
+        container.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            isScrolling = true;
+        }, { passive: true });
+        
+        container.addEventListener('touchmove', (e) => {
+            if (!isScrolling) return;
+            
+            const currentY = e.touches[0].clientY;
+            const deltaY = startY - currentY;
+            
+            // Если скроллим вниз и достигли верха
+            if (deltaY < 0 && container.scrollTop === 0) {
+                // Позволяем немного overscroll для iOS
+                return;
+            }
+            
+            // Если скроллим вверх и достигли низа
+            if (deltaY > 0 && 
+                container.scrollTop + container.clientHeight >= container.scrollHeight - 1) {
+                // Позволяем немного overscroll для iOS
+                return;
+            }
+            
+            // Обычный скролл
+            e.stopPropagation();
+        }, { passive: true });
+        
+        container.addEventListener('touchend', () => {
+            isScrolling = false;
+        }, { passive: true });
     }
     
     createCompactModal() {
@@ -1973,17 +2018,15 @@ class UniverseMap {
         const modal = document.getElementById('compact-selection-modal');
         if (modal) {
             modal.classList.remove('active');
-            
-            // Убираем класс для прокрутки
-            const cardsContainer = document.getElementById('compact-cards-container');
-            if (cardsContainer) {
-                cardsContainer.classList.remove('modal-touch-fix');
-            }
         }
         this.currentSelection = null;
         
+        // ИСПРАВЛЕНИЕ: Восстанавливаем скролл для iOS
         if (this.isMobile) {
             document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
         }
         
         debugLog('📱 Модальное окно скрыто');
